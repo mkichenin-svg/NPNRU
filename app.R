@@ -31,7 +31,7 @@ ui <- fluidPage(
       ),
       
       card(
-        card_header("LES DONNÉES À REMONTER    "),
+        card_header("LES DONNÉES À REMONTER anru ddzs    "),
         card_body(height = 30),
         p("- nombre d’heures travaillées pour les opérations liées aux travaux et dans le cadre de la gestion urbaine de proximité"),
         p("- modalités de réalisation des heures (embauche directe, intérim, alternance, formation…)"),
@@ -129,4 +129,4 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 
 
-rsconnect::writeManifest()
+
