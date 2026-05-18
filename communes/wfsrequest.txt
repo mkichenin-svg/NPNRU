@@ -1,0 +1,1 @@
+https://geoserver.peigeo.re/peigeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=peigeo:communes&outputFormat=shape-zip
