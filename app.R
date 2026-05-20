@@ -12,6 +12,8 @@ iris <- read_sf("iris/georef-france-iris-millesime.shp")
 
 genre <- read.csv2("genre.csv")
 genre
+age <- read.csv2("age.csv")
+age
 
 ui <-page_fluid( 
   
