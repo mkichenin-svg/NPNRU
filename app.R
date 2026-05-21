@@ -12,15 +12,8 @@ shapefile1 <-read_sf("communes/communesPolygon.shp")
 iris <- read_sf("iris/georef-france-iris-millesime.shp")
 
 genre <- read.csv2("genre.csv")
-genre <- mutate(genre, pourcentage = nombre / sum(nombre)*100,
-                       pourcentage = round(pourcentage,digits = 1),
-                       pourcentage = paste(pourcentage, "%"))
-
-
 age <- read.csv2("age.csv")
-age <- mutate(age, pourcentage = Nombre / sum(Nombre)*100,
-                   pourcentage = round(pourcentage, digits = 1),
-                   pourcentage = paste(pourcentage, "%"))
+
 
 ui <-page_fluid( 
   
@@ -166,7 +159,7 @@ server <- function(input, output) {
   output$age <- renderPlot(
     
     { 
-      ggplot(age,aes(x= âge, y = Nombre, fill = âge)) + geom_bar(stat = "identity", show.legend = FALSE) + theme_minimal() + 
+      ggplot(age,aes(x= age, y = nombre, fill = age)) + geom_bar(stat = "identity", show.legend = FALSE) + theme_minimal() + 
          geom_text(aes(label = pourcentage), hjust= 0.67,vjust= 1.5, color="black", size = 7) + 
         theme(axis.title = element_blank(), axis.text.y  = element_blank(), axis.text.x = element_text(size = 15 )) + scale_fill_manual(values = c ("grey", "orange","royalblue", "orange")) 
     }
