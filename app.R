@@ -30,7 +30,7 @@ ui <-page_fluid(
     
     value_box( 
       title = "", 
-      "19 726 heures financées ANRU", 
+      "19 726 heures financées ANRU à réaliser", 
       "34 025 heures à réaliser", 
       showcase = bsicons::bs_icon("clock"),
       showcase_layout = "left center",
@@ -74,7 +74,6 @@ ui <-page_fluid(
         value_box( 
           title = "", 
           "30 bénéficiaires issus d'un QPV de la ville", 
-          "89% du total",
           showcase = bsicons::bs_icon("buildings"),
           height = 50
         ) ,
@@ -83,6 +82,7 @@ ui <-page_fluid(
         value_box( 
           title = "", 
           "Bénéficiaires majoritairement masculins (32/34)",
+          showcase = bsicons::bs_icon("arrow-return-right"),
           height = 10,
         ) ,
         
@@ -91,7 +91,7 @@ ui <-page_fluid(
         value_box( 
           title = "",
           "75 % des bénéficaires ont moins de 40 ans",
-          class = "border",
+          showcase = bsicons::bs_icon("arrow-return-right"),
           height = 10
         ) ,
         
@@ -103,11 +103,11 @@ ui <-page_fluid(
     ),
   
 
-layout_column_wrap(width = 100, height = 100,
+layout_column_wrap(width = 100, height = 500,
   
 imageOutput("anru", height = 500),
 imageOutput("image", height = 500 ),
-imageOutput("mden", height = 400),  
+imageOutput("mden", height = 400, width = 500),  
 ) 
  
 )
