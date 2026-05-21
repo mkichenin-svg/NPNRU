@@ -5,15 +5,21 @@ library(ggplot2)
 library(sf)
 library(tibble)
 library(bsicons)
-
+library(dplyr)
 shapefile <-read_sf("QPV/quartiers-prioritaires-de-la-politique-de-la-ville-qpv.shp")
 shapefile1 <-read_sf("communes/communesPolygon.shp")
 iris <- read_sf("iris/georef-france-iris-millesime.shp")
 
 genre <- read.csv2("genre.csv")
-genre
+genre <- mutate(genre, pourcentage = nombre / sum(nombre)*100,
+                       pourcentage = round(pourcentage,digits = 1),
+                       pourcentage = paste(pourcentage, "%"))
+
+
 age <- read.csv2("age.csv")
-age
+age <- mutate(age, pourcentage = Nombre / sum(Nombre)*100,
+                   pourcentage = round(pourcentage, digits = 1),
+                   pourcentage = paste(pourcentage, "%"))
 
 ui <-page_fluid( 
   
@@ -30,8 +36,8 @@ ui <-page_fluid(
     
     value_box( 
       title = "", 
-      "34 025 heures à réaliser", 
       "19 726 heures financées ANRU", 
+      "34 025 heures à réaliser", 
       showcase = bsicons::bs_icon("clock"),
       showcase_layout = "left center",
       theme = "primary",
@@ -40,8 +46,8 @@ ui <-page_fluid(
     
   value_box( 
     title = "", 
-    "12 283 heures réalisées", 
-    "62% des objectifs conventionnés ANRU", 
+    "12 169 heures réalisées", 
+    "61% des objectifs conventionnés ANRU", 
     showcase = bsicons::bs_icon("calendar2-check"),
     showcase_layout = "left center",
     theme = "primary",
@@ -57,15 +63,6 @@ ui <-page_fluid(
     height = 100
   ) ,
   
-  value_box( 
-    title = "", 
-    "34 bénéficiaires issus d'un QPV", 
-    "89% du total", 
-    theme = "primary",
-    showcase = bsicons::bs_icon("buildings"),
-    height = 100
-  ) ,
-  
   ),
     
     layout_column_wrap(
@@ -78,35 +75,45 @@ ui <-page_fluid(
       
      
       card(
+        
+      
         value_box( 
           title = "", 
+          "30 bénéficiaires issus d'un QPV de la ville", 
+          "89% du total",
+          showcase = bsicons::bs_icon("buildings"),
+          height = 50
+        ) ,
+        
+        
+        value_box( 
+          title = "", 
+          "Bénéficiaires majoritairement masculins (32/34)",
+          height = 10,
+        ) ,
+        
+        plotOutput("genre", height = 100),
+        
+        value_box( 
+          title = "",
           "75 % des bénéficaires ont moins de 40 ans",
           class = "border",
           height = 10
         ) ,
         
-        
         plotOutput("age", height = 70),
-        
-        value_box( 
-          title = "", 
-          "Bénéficiaires majoritairement masculins (32/34)",
-          class = "border",
-          height = 10
-        ) ,
-        plotOutput("genre", height = 70),
+      
         
       ),
-      
      
     ),
   
 
-layout_column_wrap(  
+layout_column_wrap(width = 100, height = 100,
   
 imageOutput("anru", height = 500),
-imageOutput("image", height = 400, width = 400),  
-imageOutput("mden", height = 200, width = 100),
+imageOutput("image", height = 500 ),
+imageOutput("mden", height = 400),  
 ) 
  
 )
@@ -134,23 +141,33 @@ server <- function(input, output) {
   
   output$mden <- renderImage( 
     { 
-      list(src = "mden.png", height = "25%") 
+      list(src = "logo1.jpg", height = "35%") 
     }
   ) 
   
   output$genre <- renderPlot(
     
     { 
-      ggplot(genre,aes(x= genre, y = nombre, fill = genre)) + geom_bar(stat = "identity", show.legend = FALSE) + theme_minimal() +
-        theme(axis.title = element_blank(), axis.text.y = element_blank()) 
-      }
+      
+      
+      pie <- ggplot(genre, aes(x="", y= nombre, fill= genre)) + geom_col(color="black") +
+        coord_polar("y", start = 2.5) +
+        theme_void() + 
+        theme(legend.position = "right", legend.title = element_blank()) +
+        geom_label(aes(label = pourcentage), position= position_stack(vjust = 0.7),
+                   show.legend = FALSE) + scale_fill_manual(values = c ("grey", "orange")) 
+      
+      pie
+      },
+    height = 210, width = 500
   )
   
   output$age <- renderPlot(
     
     { 
-      ggplot(age,aes(x= âge, y = Nombre, fill = âge)) + geom_bar(stat = "identity", show.legend = FALSE) + theme_minimal()+
-        theme(axis.title = element_blank(), axis.text.y  = element_blank()) 
+      ggplot(age,aes(x= âge, y = Nombre, fill = âge)) + geom_bar(stat = "identity", show.legend = FALSE) + theme_minimal() + 
+         geom_text(aes(label = pourcentage), hjust= 0.67,vjust= 1.5, color="black", size = 7) + 
+        theme(axis.title = element_blank(), axis.text.y  = element_blank(), axis.text.x = element_text(size = 15 )) + scale_fill_manual(values = c ("grey", "orange","royalblue", "orange")) 
     }
   )
   
@@ -175,12 +192,7 @@ server <- function(input, output) {
   }) 
   
   
-
- 
-
-  
 }
-
 
 # Run the app ----
 shinyApp(ui = ui, server = server)
