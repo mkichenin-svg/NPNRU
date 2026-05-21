@@ -1,5 +1,5 @@
 age;nombre;pourcentage
- 26 ans;34;89.5 %
-27 - 40 ans;4;24.5 %
-41 - 51 ans;6;15.5 %
-Plus de 51 ans;7;10.5 %
+ moins de 26 ans;9;26%
+27 - 40 ans;16;30%
+41 - 51 ans;5;12%
+Plus de 51 ans;4;10%
