@@ -18,7 +18,7 @@ age <- read.csv2("age.csv")
 ui <-page_fluid( 
   
       titlePanel(
-        "NPNRU Rive-Droite - Saint-Benoît"
+        "NPNRU Rive droite - Ville de Saint-Benoît"
       ),
   
   theme = theme_bootswatch("minty"),
@@ -50,7 +50,7 @@ ui <-page_fluid(
   
   value_box( 
     title = "", 
-    "38 bénéficiaires", 
+    "36 bénéficiaires", 
     theme = "primary", 
     class = "border",
     showcase = bsicons::bs_icon("person-fill-check"),
@@ -63,7 +63,7 @@ ui <-page_fluid(
       
       
       card(
-        plotOutput("map", width = 700, height = 700),
+        plotOutput("map", width = 850, height = 700),
         
       ),
       
@@ -73,7 +73,8 @@ ui <-page_fluid(
       
         value_box( 
           title = "", 
-          "12 bénéficiaires issus d'un QPV", 
+          "12 bénéficiaires issus d'un QPV (33,3%)", 
+          "Dont 7 des QPV de Saint-Benoît",
           showcase = bsicons::bs_icon("buildings"),
           height = 50
         ) ,
@@ -90,7 +91,7 @@ ui <-page_fluid(
         
         value_box( 
           title = "",
-          "73 % des bénéficaires ont moins de 40 ans",
+          "64 % des bénéficaires ont moins de 41 ans",
           showcase = bsicons::bs_icon("arrow-90deg-right"),
           showcase_layout = "left center",
           height = 10
@@ -158,8 +159,8 @@ server <- function(input, output) {
       pie <- ggplot(genre, aes(x="", y= nombre, fill= genre)) + geom_col(color="black") +
         coord_polar("y", start = 2.5) +
         theme_void() + 
-        theme(legend.position = "right", legend.title = element_blank(), legend.text = element_text(size=15)) +
-        geom_label(aes(label = pourcentage), position= position_stack(vjust = 0.7),size = 5,
+        theme(legend.position = "right", legend.title = element_blank(), legend.text = element_text(size=17)) +
+        geom_label(aes(label = pourcentage), position= position_stack(vjust = 0.7),size = 5.5,
                    show.legend = FALSE) + scale_fill_manual(values = c ("royalblue", "orange")) 
       
       pie
@@ -172,7 +173,7 @@ server <- function(input, output) {
     { 
       ggplot(age,aes(x= age, y = nombre, fill = age)) + geom_bar(stat = "identity", show.legend = FALSE) + theme_minimal() + 
          geom_text(aes(label = pourcentage), hjust= 0.67,vjust= 1.5, color="black", size = 7) + 
-        theme(axis.title = element_blank(), axis.text.y  = element_blank(), axis.text.x = element_text(size = 15 )) + scale_fill_manual(values = c ("grey", "orange","royalblue", "orange")) 
+        theme(axis.title = element_blank(), axis.text.y  = element_blank(), axis.text.x = element_text(size = 17 )) + scale_fill_manual(values = c ("grey", "orange","royalblue", "orange")) 
     }
   )
   
