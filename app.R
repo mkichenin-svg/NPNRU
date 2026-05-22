@@ -30,8 +30,8 @@ ui <-page_fluid(
     
     value_box( 
       title = "", 
-      "19 726 heures financées ANRU à réaliser", 
-      "34 025 heures à réaliser", 
+      "19 726 heures conventionnées", 
+      "34 025 heures à réaliser à l'échelle du projet", 
       showcase = bsicons::bs_icon("clock"),
       showcase_layout = "left center",
       theme = "primary",
@@ -73,7 +73,7 @@ ui <-page_fluid(
       
         value_box( 
           title = "", 
-          "30 bénéficiaires issus d'un QPV de la ville", 
+          "12 bénéficiaires issus d'un QPV", 
           showcase = bsicons::bs_icon("buildings"),
           height = 50
         ) ,
@@ -81,8 +81,8 @@ ui <-page_fluid(
         
         value_box( 
           title = "", 
-          "Bénéficiaires majoritairement masculins (32/34)",
-          showcase = bsicons::bs_icon("arrow-return-right"),
+          "Bénéficiaires majoritairement masculins",
+          showcase = bsicons::bs_icon("arrow-90deg-right"),
           height = 10,
         ) ,
         
@@ -90,8 +90,9 @@ ui <-page_fluid(
         
         value_box( 
           title = "",
-          "75 % des bénéficaires ont moins de 40 ans",
-          showcase = bsicons::bs_icon("arrow-return-right"),
+          "73 % des bénéficaires ont moins de 40 ans",
+          showcase = bsicons::bs_icon("arrow-90deg-right"),
+          showcase_layout = "left center",
           height = 10
         ) ,
         
@@ -103,22 +104,25 @@ ui <-page_fluid(
     ),
   
 
-layout_column_wrap(width = 100, height = 500,
+layout_column_wrap(width = 100, height = 800,
   
-imageOutput("anru", height = 500),
-imageOutput("image", height = 500 ),
-imageOutput("mden", height = 400, width = 500),  
+imageOutput("anru", height = 550),
+imageOutput("blanc", height = 500),
+imageOutput("blanc", height = 500),
+imageOutput("image", height = 500),
+imageOutput("blanc", height = 500),
+imageOutput("blanc", height = 500),
+imageOutput("mden", height = 470),  
 ) 
  
 )
   
-  # fin corps
+# fin corps
   
 
 
 # Define server logic required to draw a histogram ----
 server <- function(input, output) {
-  
   
   
   output$image <- renderImage( 
@@ -139,17 +143,24 @@ server <- function(input, output) {
     }
   ) 
   
+  
+  output$blanc <- renderImage( 
+    { 
+      list(src = "blanc.jpg", height = "35%") 
+    }
+  ) 
+  
+  
   output$genre <- renderPlot(
     
     { 
       
-      
       pie <- ggplot(genre, aes(x="", y= nombre, fill= genre)) + geom_col(color="black") +
         coord_polar("y", start = 2.5) +
         theme_void() + 
-        theme(legend.position = "right", legend.title = element_blank()) +
+        theme(legend.position = "right", legend.title = element_blank(), legend.text = element_text(size=12)) +
         geom_label(aes(label = pourcentage), position= position_stack(vjust = 0.7),
-                   show.legend = FALSE) + scale_fill_manual(values = c ("grey", "orange")) 
+                   show.legend = FALSE) + scale_fill_manual(values = c ("royalblue", "orange")) 
       
       pie
       },
@@ -176,10 +187,10 @@ server <- function(input, output) {
       geom_sf(data = iris[12,31])+
       geom_sf(data = iris[21,31])+
       geom_sf(data= shapefile[36,], color = "black", fill="orange", alpha= 7/10) +
-      geom_sf_label(data= iris[3,31], label = "Beaufond_Le_Port")+
-      geom_sf_label(data = iris[9,31], label = "Beaufond_Distillerie")+
+      geom_sf_label(data= iris[3,31], label = "Beaufond Le port")+
+      geom_sf_label(data = iris[9,31], label = "Beaufond Distillerie")+
       geom_sf_label(data = iris[12,31], label = "Centre ville-Rive gauche")+
-      geom_sf_label(data = iris[21,31], label = "centre ville - Rive droite")+
+      geom_sf_label(data = iris[21,31], label = "Centre ville-Rive droite")+
       theme_minimal() + theme(axis.text.y = element_blank(), axis.text.x = element_blank(),
                                 axis.title.x = element_blank(), axis.title.y = element_blank())
   
