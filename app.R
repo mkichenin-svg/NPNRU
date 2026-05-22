@@ -63,7 +63,7 @@ ui <-page_fluid(
       
       
       card(
-        plotOutput("map", width = 700, height = 690),
+        plotOutput("map", width = 700, height = 700),
         
       ),
       
@@ -106,13 +106,13 @@ ui <-page_fluid(
 
 layout_column_wrap(width = 100, height = 800,
   
-imageOutput("anru", height = 550),
-imageOutput("blanc", height = 500),
-imageOutput("blanc", height = 500),
-imageOutput("image", height = 500),
-imageOutput("blanc", height = 500),
-imageOutput("blanc", height = 500),
-imageOutput("mden", height = 470),  
+imageOutput("anru", height = 450),
+imageOutput("blanc", height = 400),
+imageOutput("blanc", height = 400),
+imageOutput("image", height = 400),
+imageOutput("blanc", height = 400),
+imageOutput("blanc", height = 400),
+imageOutput("mden", height = 400),  
 ) 
  
 )
