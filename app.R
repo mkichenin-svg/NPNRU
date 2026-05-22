@@ -158,8 +158,8 @@ server <- function(input, output) {
       pie <- ggplot(genre, aes(x="", y= nombre, fill= genre)) + geom_col(color="black") +
         coord_polar("y", start = 2.5) +
         theme_void() + 
-        theme(legend.position = "right", legend.title = element_blank(), legend.text = element_text(size=12)) +
-        geom_label(aes(label = pourcentage), position= position_stack(vjust = 0.7),
+        theme(legend.position = "right", legend.title = element_blank(), legend.text = element_text(size=15)) +
+        geom_label(aes(label = pourcentage), position= position_stack(vjust = 0.7),size = 5,
                    show.legend = FALSE) + scale_fill_manual(values = c ("royalblue", "orange")) 
       
       pie
