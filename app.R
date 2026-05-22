@@ -63,7 +63,7 @@ ui <-page_fluid(
       
       
       card(
-        plotOutput("map", width = 700, height = 700),
+        plotOutput("map", width = 700, height = 690),
         
       ),
       
