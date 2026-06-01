@@ -30,7 +30,6 @@ ui <-page_fluid(
     
     value_box( 
       title = "", 
-      "19 726 heures conventionnées", 
       "34 025 heures à réaliser à l'échelle du projet", 
       showcase = bsicons::bs_icon("clock"),
       showcase_layout = "left center",
@@ -41,7 +40,7 @@ ui <-page_fluid(
   value_box( 
     title = "", 
     "14 863 heures réalisées", 
-    "75% des objectifs conventionnés ANRU", 
+    "44% des objectifs conventionnés ANRU / LBU", 
     showcase = bsicons::bs_icon("calendar2-check"),
     showcase_layout = "left center",
     theme = "primary",
