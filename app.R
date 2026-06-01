@@ -40,8 +40,8 @@ ui <-page_fluid(
     
   value_box( 
     title = "", 
-    "12 169 heures réalisées", 
-    "61% des objectifs conventionnés ANRU", 
+    "14 863 heures réalisées", 
+    "75% des objectifs conventionnés ANRU", 
     showcase = bsicons::bs_icon("calendar2-check"),
     showcase_layout = "left center",
     theme = "primary",
@@ -74,7 +74,7 @@ ui <-page_fluid(
         value_box( 
           title = "", 
           "12 bénéficiaires issus d'un QPV (33,3%)", 
-          "Dont 7 des QPV de Saint-Benoît",
+          "Dont 7 d'un QPV de Saint-Benoît",
           showcase = bsicons::bs_icon("buildings"),
           height = 50
         ) ,
@@ -182,7 +182,7 @@ server <- function(input, output) {
   output$map <- renderPlot({ 
       ggplot() +
       geom_sf(data = iris[1,31])+
-      geom_sf_label(data= iris[1,31], label = "Bras fusil")+
+      geom_sf_label(data= iris[1,31], label = "Beaulieu - Bras fusil - La Confiance")+
       geom_sf(data = iris[3,31])+
       geom_sf(data = iris[9,31])+
       geom_sf(data = iris[12,31])+
