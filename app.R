@@ -18,7 +18,7 @@ age <- read.csv2("age.csv")
 ui <-page_fluid( 
   
       titlePanel(
-        "NPNRU Rive droite - Ville de Saint-Benoît"
+        "NPNRU Rive Droite - Ville de Saint-Benoît"
       ),
   
   theme = theme_bootswatch("minty"),
@@ -188,7 +188,7 @@ server <- function(input, output) {
       geom_sf(data = iris[12,31])+
       geom_sf(data = iris[21,31])+
       geom_sf(data= shapefile[36,], color = "black", fill="orange", alpha= 7/10) +
-      geom_sf_label(data= iris[3,31], label = "Beaufond Le port")+
+      geom_sf_label(data= iris[3,31], label = "Butor-Beaufond Le port")+
       geom_sf_label(data = iris[9,31], label = "Beaufond Distillerie")+
       geom_sf_label(data = iris[12,31], label = "Centre ville-Rive gauche")+
       geom_sf_label(data = iris[21,31], label = "Centre ville-Rive droite")+
