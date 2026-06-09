@@ -20,15 +20,6 @@ genre <- read.csv2("genre.csv")
 age <- read.csv2("age.csv")
 
 
-heure_conventionne_saint_pierre     <- read_excel("heure_conventionné_saint_pierre.xlsx")
-heure_non_conventionne_saint_pierre <- read_excel("heure_non_conventionné_saint_pierre.xlsx")
-objectif_saint_pierre_anru          <- read_excel("objectif_saint_pierre_anru.xlsx")
-objectif_saint_pierre_lbu           <- read_excel("objectif_saint_pierre_lbu.xlsx")
-
-heure_le_port            <- read_excel("heure_le_port.xlsx")
-objectif_echelle_le_port <- read_excel("objectif_echelle_le_port.xlsx")
-objectif_anru_le_port    <- read_excel("objectif_anru_le_port.xlsx")
-objectif_lbu_le_port     <- read_excel("objectif_lbu_le_port.xlsx")
 
 quali_le_port <- read.csv2("quali_le_port.csv", fileEncoding = "UTF-8-BOM")
 
