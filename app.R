@@ -19,9 +19,6 @@ iris2 <- read_sf("iris2/georef-france-iris-millesime.shp")
 genre <- read.csv2("genre.csv")
 age <- read.csv2("age.csv")
 
-heure_echelle_saint_andre <- read_excel("heure_echelle_saint_andré.xlsx")
-heure_ANRU_saint_andre    <- read_excel("heure_anru_saint_andré.xlsx")
-objectifs_saint_andre     <- read_excel("objectifs_saint_andré.xlsx")
 
 heure_conventionne_saint_pierre     <- read_excel("heure_conventionné_saint_pierre.xlsx")
 heure_non_conventionne_saint_pierre <- read_excel("heure_non_conventionné_saint_pierre.xlsx")
