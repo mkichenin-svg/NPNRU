@@ -31,20 +31,7 @@ heure_non_conventionné_saint_pierre <- read.csv2("heure_non_conventionné_saint
 heures_le_port                      <- read.csv2("heures_le_port.csv")
 heure_saint_louis1                  <- read.csv2("heure_saint_louis1.csv")
 
-# Données Excel manquantes
-echelle_saint_denis        <- read_excel("echelle_saint_denis.xlsx")
-MO_saint_denis             <- read_excel("MO_saint_denis.xlsx")
-echelle_saint_benoit       <- read_excel("echelle_saint_benoit.xlsx")
-echelle_LBU_saint_benoit   <- read_excel("echelle_LBU_saint_benoit.xlsx")
-echelle_NPNRU_saint_benoit <- read_excel("echelle_NPNRU_saint_benoit.xlsx")
-objectifs_saint_andré      <- read_excel("objectifs_saint_andré.xlsx")
-objectif_saint_pierre_anru <- read_excel("objectif_saint_pierre_anru.xlsx")
-objectif_saint_pierre_lbu  <- read_excel("objectif_saint_pierre_lbu.xlsx")
-objectif_echelle_le_port   <- read_excel("objectif_echelle_le_port.xlsx")
-objectif_anru_le_port      <- read_excel("objectif_anru_le_port.xlsx")
-objectif_lbu_le_port       <- read_excel("objectif_lbu_le_port.xlsx")
-objectif_operation_saint_louis <- read_excel("objectif_opération_saint_louis.xlsx")
-objectif_MO_saint_louis    <- read_excel("objectif_MO_saint_louis.xlsx")
+
 
 genre_le_port <- data.frame(
   genre       = c("Masculin", "Féminin"),
