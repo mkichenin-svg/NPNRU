@@ -133,13 +133,7 @@ ui <-page_navbar( title = div("POINT D'ÉTAPE ANRU ", class="custom title"),
         
         nav_panel(width=200,"Avancement des heures d'insertion",
                   tableOutput("heures_saint_denis")),
-        plotOutput("genre", height = 100),
-        
-    
-        
-        plotOutput("age", height = 70),
       
-        
       ),
      
     ),
@@ -224,7 +218,7 @@ navset_card_tab(
       height = 10,
     ) ,
     
-    plotOutput("genre", height = 150, width = 550),
+    plotOutput("genre_saint_benoit", height = 150, width = 550),
     
     value_box( 
       title = "",
@@ -234,7 +228,7 @@ navset_card_tab(
       height = 10
     ) ,
     
-    plotOutput("age", height = 70),
+    plotOutput("age_saint_benoit", height = 70),
     
     
   ),
@@ -303,13 +297,6 @@ nav_panel("Saint-André - Centre Ville",
                        tableOutput("heure_ANRU_saint_andre")),
            
              ),
-             plotOutput("", height = 100),
-             
-            
-             
-             plotOutput("", height = 70),
-             
-             
            ),
            
          ),
@@ -393,13 +380,6 @@ nav_panel("Saint-Pierre - Bois d'olives",
              
               
         
-              plotOutput("", height = 100),
-              
-            
-              
-              plotOutput("", height = 70),
-              
-              
             ),
             
           ),
@@ -586,12 +566,6 @@ nav_panel("Saint-Louis - Le Gol",
               
             
               
-              plotOutput("", height = 100),
-              
-              
-              plotOutput("", height = 70, width = 150),
-              
-              
             ),
             
           ),
@@ -621,29 +595,28 @@ server <- function(input, output) {
   
   
   
-  output$genre <- renderPlot(
-    
-    { 
-      
-      pie <- ggplot(genre, aes(x="", y= nombre, fill= genre)) + geom_col(color="black") +
-        coord_polar("y", start = 2.5) +
-        theme_void() + 
-        theme(legend.position = "right", legend.title = element_blank(), legend.text = element_text(size=17)) +
-        geom_label(aes(label = pourcentage), position= position_stack(vjust = 0.7),size = 5.5,
-                   show.legend = FALSE) + scale_fill_manual(values = c ("royalblue", "orange")) 
-      
-      pie
-      },
-    height = 210, width = 500)
+  genre_pie <- function(df) {
+    ggplot(df, aes(x="", y= nombre, fill= genre)) + geom_col(color="black") +
+      coord_polar("y", start = 2.5) +
+      theme_void() + 
+      theme(legend.position = "right", legend.title = element_blank(), legend.text = element_text(size=17)) +
+      geom_label(aes(label = pourcentage), position= position_stack(vjust = 0.7),size = 5.5,
+                 show.legend = FALSE) + scale_fill_manual(values = c ("royalblue", "orange"))
+  }
   
-  output$age <- renderPlot(
-    
-    { 
-      ggplot(age,aes(x= age, y = nombre, fill = age)) + geom_bar(stat = "identity", show.legend = FALSE) + theme_minimal() + 
-         geom_text(aes(label = pourcentage), hjust= 0.67,vjust= 1.5, color="black", size = 7) + 
-        theme(axis.title = element_blank(), axis.text.y  = element_blank(), axis.text.x = element_text(size = 17 )) + scale_fill_manual(values = c ("grey", "orange","royalblue", "orange")) 
-    }
-  )
+  age_bar <- function(df) {
+    ggplot(df, aes(x= age, y = nombre, fill = age)) + geom_bar(stat = "identity", show.legend = FALSE) + theme_minimal() + 
+      geom_text(aes(label = pourcentage), hjust= 0.67,vjust= 1.5, color="black", size = 7) + 
+      theme(axis.title = element_blank(), axis.text.y  = element_blank(), axis.text.x = element_text(size = 17)) +
+      scale_fill_manual(values = c ("grey", "orange","royalblue", "orange"))
+  }
+
+  # Graphes supprimés de Saint-Denis
+  # output$genre_saint_denis <- renderPlot({ genre_pie(genre) }, height = 210, width = 500)
+  # output$age_saint_denis   <- renderPlot({ age_bar(age) })
+  
+  output$genre_saint_benoit <- renderPlot({ genre_pie(genre) }, height = 210, width = 500)
+  output$age_saint_benoit   <- renderPlot({ age_bar(age) })
   
   # carte
   
