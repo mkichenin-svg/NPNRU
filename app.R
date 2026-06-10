@@ -5,7 +5,8 @@ library(ggplot2)
 library(sf)
 library(tibble)
 library(bsicons)
-
+library(readr)
+library(readxl)
 
 shapefile <-read_sf("QPV/quartiers-prioritaires-de-la-politique-de-la-ville-qpv.shp")
 shapefile1 <-read_sf("communes/communesPolygon.shp")
@@ -20,16 +21,16 @@ age <- read.csv2("age.csv")
 
 quali_le_port <- read.csv2("quali_le_port.csv", fileEncoding = "UTF-8-BOM")
 
-# Données CSV manquantes
-heures_saint_denis                  <- read.csv2("heures_saint_denis.csv")
-heure_echelle_saint_benoit          <- read.csv2("heure_echelle_saint_benoit.csv")
-heure_ANRU_saint_benoit             <- read.csv2("heure_ANRU_saint_benoit.csv")
-heure_echelle_saint_andré           <- read.csv2("heure_echelle_saint_andré.csv")
-heure_anru_saint_andré              <- read.csv2("heure_anru_saint_andré.csv")
-heure_conventionné_saint_pierre     <- read.csv2("heure_conventionné_saint_pierre.csv")
-heure_non_conventionné_saint_pierre <- read.csv2("heure_non_conventionné_saint_pierre.csv")
-heures_le_port                      <- read.csv2("heures_le_port.csv")
-heure_saint_louis1                  <- read.csv2("heure_saint_louis1.csv")
+# Données CSV manquantes (readr gère mieux l'encodage UTF-8 avec BOM)
+heures_saint_denis                  <- read_csv2("heures_saint_denis.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
+heure_echelle_saint_benoit          <- read_csv2("heure_echelle_saint_benoit.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
+heure_ANRU_saint_benoit             <- read_csv2("heure_ANRU_saint_benoit.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
+heure_echelle_saint_andré           <- read_csv2("heure_echelle_saint_andré.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
+heure_anru_saint_andré              <- read_csv2("heure_anru_saint_andré.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
+heure_conventionné_saint_pierre     <- read_csv2("heure_conventionné_saint_pierre.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
+heure_non_conventionné_saint_pierre <- read_csv2("heure_non_conventionné_saint_pierre.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
+heures_le_port                      <- read_csv2("heures_le_port.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
+heure_saint_louis1                  <- read_csv2("heure_saint_louis1.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
 
 
 
@@ -108,7 +109,6 @@ ui <-page_navbar( title = div("POINT D'ÉTAPE ANRU ", class="custom title"),
   value_box( 
     title = "", 
     "57 205 heures réalisées", 
-    "% des objectifs conventionnés ANRU / LBU", 
     showcase = bsicons::bs_icon("calendar2-check"),
     showcase_layout = "left center",
     theme = "primary",
@@ -267,7 +267,6 @@ nav_panel("Saint-André - Centre Ville",
                               value_box( 
                                 title = "", 
                                 "49 772 heures réalisées", 
-                                "% des objectifs conventionnés ANRU / LBU", 
                                 showcase = bsicons::bs_icon("calendar2-check"),
                                 showcase_layout = "left center",
                                 theme = "primary",
@@ -337,7 +336,6 @@ nav_panel("Saint-Pierre - Bois d'olives",
                                value_box( 
                                  title = "", 
                                  "3448,7 heures réalisées", 
-                                 "% des objectifs conventionnés ANRU / LBU", 
                                  showcase = bsicons::bs_icon("calendar2-check"),
                                  showcase_layout = "left center",
                                  theme = "primary",
@@ -419,7 +417,6 @@ nav_panel("Le Port - Ariste Bolon",
                                value_box( 
                                  title = "", 
                                  "28 038,4 heures réalisées", 
-                                 "% des objectifs conventionnés ANRU / LBU", 
                                  showcase = bsicons::bs_icon("calendar2-check"),
                                  showcase_layout = "left center",
                                  theme = "primary",
@@ -521,7 +518,6 @@ nav_panel("Saint-Louis - Le Gol",
                                value_box( 
                                  title = "", 
                                  "5829 heures réalisées", 
-                                 "% des objectifs conventionnés ANRU / LBU", 
                                  showcase = bsicons::bs_icon("calendar2-check"),
                                  showcase_layout = "left center",
                                  theme = "primary",
@@ -658,9 +654,9 @@ server <- function(input, output) {
 \n19 comités d’insertion, à raison d’un par trimestre, permettent un suivi régulier de la mise en œuvre du volet d’insertion du projet PRUNEL. 
 \nSuperficie = 383 593 m²  "})
   
-  output$heures_saint_denis <- renderTable(heures_saint_denis)
-  output$echelle_saint_denis <- renderTable(echelle_saint_denis)
-  output$MO_saint_denis <- renderTable({head(MO_saint_denis)})
+  output$heures_saint_denis <- renderTable(striped = TRUE,heures_saint_denis)
+  output$echelle_saint_denis <- renderTable(striped = TRUE,echelle_saint_denis)
+  output$MO_saint_denis <- renderTable(striped = TRUE,{head(MO_saint_denis)})
   
   output$map <- renderPlot({ 
       ggplot() +
@@ -687,11 +683,11 @@ server <- function(input, output) {
 La CIREST, la ville de Saint-Benoît, la SIDR et la SEMAC impliqués dans le projet Rive Droite bénéficie donc d’un accompagnement commun à l’achat socialement responsable par la MDEN ce qui facilite le suivi et l’élaboration des bilans. 
 \nSuperficie : 1 656 391 m²"})
   
-output$echelle_saint_benoit <- renderTable({head(echelle_saint_benoit)})
-output$echelle_LBU_saint_benoit <- renderTable({head(echelle_LBU_saint_benoit)})
-output$echelle_NPNRU_saint_benoit <- renderTable({head(echelle_NPNRU_saint_benoit)})
-output$heure_echelle_saint_benoit <- renderTable({heure_echelle_saint_benoit})
-output$heure_ANRU_saint_benoit <- renderTable({heure_ANRU_saint_benoit})
+output$echelle_saint_benoit <- renderTable(striped = TRUE,{head(echelle_saint_benoit)})
+output$echelle_LBU_saint_benoit <- renderTable(striped = TRUE,{head(echelle_LBU_saint_benoit)})
+output$echelle_NPNRU_saint_benoit <- renderTable(striped = TRUE,{head(echelle_NPNRU_saint_benoit)})
+output$heure_echelle_saint_benoit <- renderTable(striped = TRUE,{heure_echelle_saint_benoit})
+output$heure_ANRU_saint_benoit <- renderTable(striped = TRUE,{heure_ANRU_saint_benoit})
   
   output$map_saint_andré <- renderPlot({ 
     ggplot() +
@@ -715,9 +711,9 @@ output$info_saint_andré <- renderText({"La convention pluriannuelle du projet d
 La ville de Saint-André et la SIDR impliqués dans le projet Rive Droite bénéficie donc d’un accompagnement commun à l’achat socialement responsable par la MDEN ce qui facilite le suivi et l’élaboration des bilans. 
 \nSuperficie = 758 114 m²"})
 
-output$heure_echelle_saint_andré <- renderTable({heure_echelle_saint_andré})
-output$objectifs_saint_andre     <- renderTable({objectifs_saint_andre})
-output$heure_ANRU_saint_andre    <- renderTable({heure_anru_saint_andré})
+output$heure_echelle_saint_andré <- renderTable(striped = TRUE,{heure_echelle_saint_andré})
+output$objectifs_saint_andre     <- renderTable(striped = TRUE,{objectifs_saint_andre})
+output$heure_ANRU_saint_andre    <- renderTable(striped = TRUE,{heure_anru_saint_andré})
 
 
 output$map_saint_pierre <- renderPlot({ 
@@ -736,10 +732,10 @@ output$info_saint_pierre <- renderText({"La convention pluriannuelle du projet d
 \nLa ville de Saint-Pierre travaille actuellement avec les donneurs d’ordre impliqués dans le projet a la mutualisation de la facilitation pour assurer la bonne mise en œuvre du volet social. 
 \nSuperficie = 554 830 m²"})
 
-output$heure_conventionne_saint_pierre     <- renderTable({heure_conventionné_saint_pierre})
-output$objectif_saint_pierre_anru          <- renderTable({objectif_saint_pierre_anru})
-output$heure_non_conventionne_saint_pierre <- renderTable({heure_non_conventionné_saint_pierre})
-output$objectif_saint_pierre_lbu           <- renderTable({objectif_saint_pierre_lbu})
+output$heure_conventionne_saint_pierre     <- renderTable(striped = TRUE,{heure_conventionné_saint_pierre})
+output$objectif_saint_pierre_anru          <- renderTable(striped = TRUE,{objectif_saint_pierre_anru})
+output$heure_non_conventionne_saint_pierre <- renderTable(striped = TRUE,{heure_non_conventionné_saint_pierre})
+output$objectif_saint_pierre_lbu           <- renderTable(striped = TRUE,{objectif_saint_pierre_lbu})
 
 
 output$map_le_port <- renderPlot({ 
@@ -774,10 +770,10 @@ output$map_le_port <- renderPlot({
 output$info_le_port <- renderText({"La convention pluriannuelle du projet de renouvellement urbain de la ville du Port Ariste Bolon a été signée le 13 mars 2020 (avenant n°1 signé le 13 avril 2022).
   \nSuperficie = 1 884 242 m²"})
 
-output$heures_le_port           <- renderTable({heures_le_port})
-output$objectif_echelle_le_port <- renderTable({objectif_echelle_le_port})
-output$objectif_anru_le_port   <- renderTable({objectif_anru_le_port})
-output$objectif_lbu_le_port    <- renderTable({objectif_lbu_le_port})
+output$heures_le_port           <- renderTable(striped = TRUE,{heures_le_port})
+output$objectif_echelle_le_port <- renderTable(striped = TRUE,{objectif_echelle_le_port})
+output$objectif_anru_le_port   <- renderTable(striped = TRUE,{objectif_anru_le_port})
+output$objectif_lbu_le_port    <- renderTable(striped = TRUE,{objectif_lbu_le_port})
 
 output$genre_le_port <- renderPlot({
   pie <- ggplot(genre_le_port, aes(x = "", y = nombre, fill = genre)) +
@@ -806,7 +802,7 @@ output$contrat_le_port <- renderPlot({
   ggplot(contrat_le_port, aes(x = contrat, y = nombre, fill = contrat)) +
     geom_bar(stat = "identity", show.legend = FALSE) +
     theme_minimal() +
-    geom_text(aes(label = pourcentage), hjust = 0.67, vjust = 0.5, color = "black", size = 6.3) +
+    geom_text(aes(label = pourcentage), hjust = 0.67, vjust = 0.5, color = "black", size = 6) +
     theme(axis.title = element_blank(), axis.text.y = element_blank(),
           axis.text.x = element_text(size = 17)) +
     scale_fill_manual(values = c("royalblue", "orange", "grey"))
@@ -831,9 +827,9 @@ output$contrat_le_port <- renderPlot({
 \nSuperficie : 413 875 m²
 "})
 
-output$heure_saint_louis1 <- renderTable({heure_saint_louis1})
-output$objectif_operation_saint_louis <- renderTable({objectif_operation_saint_louis})
-output$objectif_MO_saint_louis        <- renderTable({objectif_MO_saint_louis})
+output$heure_saint_louis1 <- renderTable(striped = TRUE,{heure_saint_louis1})
+output$objectif_operation_saint_louis <- renderTable(striped = TRUE,{objectif_operation_saint_louis})
+output$objectif_MO_saint_louis        <- renderTable(striped = TRUE,{objectif_MO_saint_louis})
 
 }
 
