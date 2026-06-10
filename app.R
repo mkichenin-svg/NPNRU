@@ -84,18 +84,18 @@ ui <- page_fillable(
   # Header navbar
   tags$nav(
     class = "navbar navbar-expand-lg navbar-light bg-light w-100",
-    style = "border-bottom: 1px solid #dee2e6; position: relative; z-index: 100; padding: -10px 10px; display: flex; align-items: center; min-height: auto; gap: 0; margin: -10px 0px;",
+    style = "border-bottom: 1px solid #dee2e6; position: relative; z-index: 100; padding: 0px 10px; display: flex; align-items: center; min-height: auto; gap: 0;",
     # Logos on the left
     tags$div(
-      style = "display: flex; align-items: center; gap: 20px; line-height: 1;",
-      tags$img(src = "img/anru.png", style = "height: 140px; object-fit: contain; display: block;"),
-      tags$img(src = "img/logo_pref.png", style = "height: 80px; object-fit: contain; display: block;"),
-      tags$img(src = "img/logo_mden.png", style = "height: 45px; object-fit: contain; display: block;")
+      style = "display: flex; align-items: center; gap: 20px; line-height: 0.9; margin-top: -10px; margin-bottom: -10px;",
+      tags$img(src = "img/anru.png", style = "height: 150px; object-fit: contain; display: block;"),
+      tags$img(src = "img/logo_pref.png", style = "height: 90px; object-fit: contain; display: block;"),
+      tags$img(src = "img/logo_mden.png", style = "height: 50px; object-fit: contain; display: block;")
     ),
     # Title on the left
     tags$div(
-      style = "margin-left: 70px; font-size: 23px; font-weight: bold; color: #2c3e50; line-height: 1; display: flex; align-items: center;",
-      
+      style = "margin-left: 70px; font-size: 23px; font-weight: bold; color: #2c3e50; line-height: 1; display: flex; align-items: center; margin-top: -10px; margin-bottom: -10px;",
+      "POINT D'ÉTAPE ANRU"
     )
   ),
 
