@@ -5,7 +5,11 @@ library(ggplot2)
 library(sf)
 library(tibble)
 library(bsicons)
-library(DT)
+
+if (!require(DT)) {
+  install.packages("DT")
+  library(DT)
+}
 
 addResourcePath("img", ".")
 
