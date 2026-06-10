@@ -131,7 +131,7 @@ ui <-page_navbar( title = div("POINT D'ÉTAPE ANRU ", class="custom title"),
       card(
         
         nav_panel(width=200,"Avancement des heures d'insertion",
-                tableOutput("heures_saint_denis")),
+                gt_output("heures_saint_denis")),
       
       ),
      
@@ -646,7 +646,7 @@ server <- function(input, output) {
 \n19 comités d’insertion, à raison d’un par trimestre, permettent un suivi régulier de la mise en œuvre du volet d’insertion du projet PRUNEL. 
 \nSuperficie = 383 593 m²  "})
   
-  output$heures_saint_denis <- renderTable({heures_saint_denis})
+  output$heures_saint_denis <- render_gt({gt(heures_saint_denis)})
   output$echelle_saint_denis <- renderTable({head(echelle_saint_denis)})
   output$MO_saint_denis <- renderTable({head(MO_saint_denis)})
   
