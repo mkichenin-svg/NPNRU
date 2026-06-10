@@ -19,7 +19,6 @@ genre <- read.csv2("genre.csv")
 age <- read.csv2("age.csv")
 
 
-
 quali_le_port <- read.csv2("quali_le_port.csv", fileEncoding = "UTF-8-BOM")
 
 genre_le_port <- data.frame(
@@ -647,7 +646,7 @@ server <- function(input, output) {
 \n19 comités d’insertion, à raison d’un par trimestre, permettent un suivi régulier de la mise en œuvre du volet d’insertion du projet PRUNEL. 
 \nSuperficie = 383 593 m²  "})
   
-  output$heures_saint_denis <- renderTable(heures_saint_denis)
+  output$heures_saint_denis <- renderTable({head(heures_saint_denis)})
   output$echelle_saint_denis <- renderTable({head(echelle_saint_denis)})
   output$MO_saint_denis <- renderTable({head(MO_saint_denis)})
   
