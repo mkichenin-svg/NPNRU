@@ -5,8 +5,8 @@ library(ggplot2)
 library(sf)
 library(tibble)
 library(bsicons)
-library(readr)
-library(readxl)
+
+
 
 shapefile <-read_sf("QPV/quartiers-prioritaires-de-la-politique-de-la-ville-qpv.shp")
 shapefile1 <-read_sf("communes/communesPolygon.shp")
