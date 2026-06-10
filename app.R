@@ -6,7 +6,20 @@ library(sf)
 library(tibble)
 library(bsicons)
 
-
+# Fonction pour lire CSV avec encodage UTF-8-BOM correctement
+read_csv2_utf8 <- function(file) {
+  # Lire en UTF-8
+  con <- file(file, "r", encoding = "UTF-8")
+  on.exit(close(con))
+  df <- read.csv2(con, stringsAsFactors = FALSE)
+  # Corriger les noms de colonnes en lisant directement le fichier texte
+  lines <- readLines(file, n = 1, encoding = "UTF-8")
+  # Supprimer le BOM si présent
+  lines <- gsub("^\xef\xbb\xbf", "", lines)
+  col_names <- strsplit(lines, ";")[[1]]
+  colnames(df) <- col_names
+  df
+}
 
 shapefile <-read_sf("QPV/quartiers-prioritaires-de-la-politique-de-la-ville-qpv.shp")
 shapefile1 <-read_sf("communes/communesPolygon.shp")
@@ -21,16 +34,16 @@ age <- read.csv2("age.csv")
 
 quali_le_port <- read.csv2("quali_le_port.csv", fileEncoding = "UTF-8-BOM")
 
-# Données CSV manquantes (readr gère mieux l'encodage UTF-8 avec BOM)
-heures_saint_denis                  <- read_csv2("heures_saint_denis.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
-heure_echelle_saint_benoit          <- read_csv2("heure_echelle_saint_benoit.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
-heure_ANRU_saint_benoit             <- read_csv2("heure_ANRU_saint_benoit.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
-heure_echelle_saint_andré           <- read_csv2("heure_echelle_saint_andré.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
-heure_anru_saint_andré              <- read_csv2("heure_anru_saint_andré.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
-heure_conventionné_saint_pierre     <- read_csv2("heure_conventionné_saint_pierre.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
-heure_non_conventionné_saint_pierre <- read_csv2("heure_non_conventionné_saint_pierre.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
-heures_le_port                      <- read_csv2("heures_le_port.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
-heure_saint_louis1                  <- read_csv2("heure_saint_louis1.csv", locale = locale(encoding = "UTF-8"), show_col_types = FALSE)
+# Données CSV manquantes
+heures_saint_denis                  <- read_csv2_utf8("heures_saint_denis.csv")
+heure_echelle_saint_benoit          <- read_csv2_utf8("heure_echelle_saint_benoit.csv")
+heure_ANRU_saint_benoit             <- read_csv2_utf8("heure_ANRU_saint_benoit.csv")
+heure_echelle_saint_andré           <- read_csv2_utf8("heure_echelle_saint_andré.csv")
+heure_anru_saint_andré              <- read_csv2_utf8("heure_anru_saint_andré.csv")
+heure_conventionné_saint_pierre     <- read_csv2_utf8("heure_conventionné_saint_pierre.csv")
+heure_non_conventionné_saint_pierre <- read_csv2_utf8("heure_non_conventionné_saint_pierre.csv")
+heures_le_port                      <- read_csv2_utf8("heures_le_port.csv")
+heure_saint_louis1                  <- read_csv2_utf8("heure_saint_louis1.csv")
 
 
 
