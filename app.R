@@ -69,40 +69,39 @@ contrat_le_port <- data.frame(
 
 
 
-ui <-page_navbar( title = div("POINT D'ÉTAPE ANRU ", class="custom title"), 
-    # Custom CSS to change title size
-    header = tagList(
-    tags$style(HTML("
-    .navbar .navbar-brand {
-      font-size: 20px;
-      font-weight: bold;
-      color: #2c3e50;
-    } ")),
-    tags$script(HTML("
-      var observer = new MutationObserver(function() {
-        document.querySelectorAll('[title]').forEach(function(el) {
-          if (el.title.toLowerCase().includes('arrow keys') ||
-              el.title.toLowerCase().includes('resize')) {
-            el.removeAttribute('title');
-          }
-        });
-      });
-      observer.observe(document.body, { childList: true, subtree: true });
-    "))
-    ),
-                        
+ui <- page_fillable(
   theme = theme_bootswatch("minty"),
   
-  sidebar = sidebar(width= 170,
-                    div(style = "max-width: 400px; font-size: 0.785 rem; margin-left: 1px; margin-bottom: 4px;", textOutput("info_side")),
-                    div(style = "display: flex; flex-direction: column; align-items: center; gap: 6px;",
-                      tags$img(src = "img/anru.png",      style = "width: 100%; height: auto; max-height: 150px; object-fit: contain;"),
-                      tags$img(src = "img/blanc.jpg",      style = "width: 100%; height: auto; max-height: 100px; object-fit: contain;"),
-                      tags$img(src = "img/logo_pref.png", style = "width: 100%; height: auto; max-height: 150px; object-fit: contain;"),
-                      tags$img(src = "img/blanc.jpg",      style = "width: 100%; height: auto; max-height: 100px; object-fit: contain;"),
-                      tags$img(src = "img/logo_mden.png", style = "width: 100%; height: auto; max-height: 200px; object-fit: contain;")
-                    )
-                    ),
+  tags$script(HTML("
+    document.addEventListener('DOMContentLoaded', function() {
+      // Remove all title attributes that might contain 'toggle'
+      document.querySelectorAll('[title*=\"toggle\" i], [title*=\"sidebar\" i]').forEach(function(el) {
+        el.removeAttribute('title');
+      });
+    });
+  ")),
+  
+  # Header navbar
+  tags$nav(
+    class = "navbar navbar-expand-lg navbar-light bg-light w-100",
+    style = "border-bottom: 1px solid #dee2e6; position: relative; z-index: 100; padding: 10px 10px;",
+    # Logos and title on the left
+    tags$div(
+      style = "display: flex; align-items: center; gap: 15px; margin-right: auto;",
+      tags$img(src = "img/anru.png", style = "height: 100px; object-fit: contain;"),
+      tags$img(src = "img/logo_pref.png", style = "height: 90px; object-fit: contain;"),
+      tags$img(src = "img/logo_mden.png", style = "height: 50px; object-fit: contain;"),
+      # Title next to logos
+      tags$div(
+        style = "font-size: 18px; font-weight: bold; color: #2c3e50; white-space: nowrap;",
+        "POINT D'ÉTAPE ANRU"
+      )
+    )
+  ),
+
+  # Tabbed content
+  navset_card_tab(
+    id = "main_tabs",
   
   # Page saint-denis
   
@@ -600,18 +599,14 @@ nav_panel("Saint-Louis - Le Gol",
 
 
 
-# fin corps
-)
-# fin corps
+  ) # fin navset_card_tab
+) # fin page_fillable
   
 
 
 # Define server logic required to draw a histogram ----
 server <- function(input, output) {
   
-  
-  
-  output$info_side <- renderText({"Cette note présente un point d’étape sur la mise en œuvre du volet insertion des NPNRU de La Réunion."})
   
   
   
