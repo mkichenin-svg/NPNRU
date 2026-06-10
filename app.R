@@ -84,16 +84,16 @@ ui <- page_fillable(
   # Header navbar
   tags$nav(
     class = "navbar navbar-expand-lg navbar-light bg-light w-100",
-    style = "border-bottom: 1px solid #dee2e6; position: relative; z-index: 100; padding: 10px 10px;",
+    style = "border-bottom: 1px solid #dee2e6; position: relative; z-index: 100; padding: 5px 10px;",
     # Logos and title on the left
     tags$div(
-      style = "display: flex; align-items: center; gap: 15px; margin-right: auto;",
+      style = "display: flex; align-items: center; gap: 12px; margin-right: auto;",
       tags$img(src = "img/anru.png", style = "height: 100px; object-fit: contain;"),
-      tags$img(src = "img/logo_pref.png", style = "height: 90px; object-fit: contain;"),
-      tags$img(src = "img/logo_mden.png", style = "height: 50px; object-fit: contain;"),
+      tags$img(src = "img/logo_pref.png", style = "height: 80px; object-fit: contain;"),
+      tags$img(src = "img/logo_mden.png", style = "height: 47px; object-fit: contain;"),
       # Title next to logos
       tags$div(
-        style = "font-size: 18px; font-weight: bold; color: #2c3e50; white-space: nowrap;",
+        style = "font-size: 16px; font-weight: bold; color: #2c3e50; white-space: nowrap;",
         "POINT D'ÉTAPE ANRU"
       )
     )
