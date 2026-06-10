@@ -5,6 +5,7 @@ library(ggplot2)
 library(sf)
 library(tibble)
 library(bsicons)
+library(DT)
 
 addResourcePath("img", ".")
 
