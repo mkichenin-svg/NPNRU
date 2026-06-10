@@ -95,7 +95,7 @@ ui <- page_fillable(
     # Title on the left
     tags$div(
       style = "margin-left: 70px; font-size: 23px; font-weight: bold; color: #2c3e50; line-height: 1; display: flex; align-items: center;",
-      "POINT D'ÉTAPE ANRU"
+      
     )
   ),
 
@@ -475,10 +475,10 @@ nav_panel("Le Port - Ariste Bolon",
                 title = "", 
                 "Bénéficiaires majoritairement masculins",
                 showcase = bsicons::bs_icon("arrow-90deg-right"),
-                height = 70,
+                height = 100,
               ) ,
               
-              plotOutput("genre_le_port", height = 200),
+              plotOutput("genre_le_port",height = 150, width = 550),
               
               value_box( 
                 title = "",
@@ -794,7 +794,7 @@ output$genre_le_port <- renderPlot({
                size = 5.5, show.legend = FALSE) +
     scale_fill_manual(values = c("royalblue", "orange"))
   pie
-}, height = 200, width = 500)
+}, height = 165, width = 500)
 
 output$age_le_port <- renderPlot({
   ggplot(age_le_port, aes(x = age, y = nombre, fill = age)) +
