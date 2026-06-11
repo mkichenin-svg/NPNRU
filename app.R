@@ -67,7 +67,33 @@ contrat_le_port <- data.frame(
   pourcentage = c("47%", "50%", "3%")
 )
 
+# Dataframes pour Saint-André
+genre_saint_andre <- data.frame(
+  genre       = c("Masculin"),
+  nombre      = c(41),
+  pourcentage = c("100%")
+)
 
+age_saint_andre <- data.frame(
+  age         = factor(c("moins de 26 ans", "26 - 40 ans", "41 - 50 ans", "Plus de 51 ans"),
+                       levels = c("moins de 26 ans", "26 - 40 ans", "41 - 50 ans", "Plus de 51 ans")),
+  nombre      = c(5, 20, 10, 6),
+  pourcentage = c("12,2%", "48,8%", "24,4%", "14,6%")
+)
+
+modalite_saint_andre <- data.frame(
+  modalite    = factor(c("ETTI", "Embauche directe"),
+                       levels = c("ETTI", "Embauche directe")),
+  nombre      = c(33, 8),
+  pourcentage = c("80,5%", "19,5%")
+)
+
+metier_saint_andre <- data.frame(
+  metier      = factor(c("Autre / Métier non défini", "Entretien des espaces verts", "Manoeuvre et conduite d'engins lourds de manutention"),
+                       levels = c("Autre / Métier non défini", "Entretien des espaces verts", "Manoeuvre et conduite d'engins lourds de manutention")),
+  nombre      = c(7, 10, 24),
+  pourcentage = c("17,1%", "24,4%", "58,5%")
+)
 
 ui <- page_fillable(
   theme = theme_bootswatch("minty"),
@@ -155,7 +181,8 @@ ui <- page_fillable(
       card(
         
         nav_panel(width=200,"Avancement des heures d'insertion",
-                tableOutput("heures_saint_denis")),
+                tableOutput("heures_saint_denis"),
+                ),
       
       ),
      
@@ -200,6 +227,13 @@ nav_panel("Saint-Benoît - Rive Droite",p(layout_column_wrap(width = 200,
                                                 height = 100
                                               ) ,
                                               
+                                              value_box( 
+                                                title = "", 
+                                                "12 bénéficiaires issus d'un QPV (33,3%)", 
+                                                showcase = bsicons::bs_icon("buildings"),
+                                                height = 50
+                                              ) ,
+                                              
 ),
 
 layout_column_wrap(width = 550, height = 770,
@@ -212,10 +246,10 @@ navset_card_tab(
       plotOutput("map", width = 500, height = 500),
       div(style = "max-width: 300px; font-size: 0.785 rem; margin-left: 110px; white-space: pre-line;", textOutput("info_saint_benoit")))),
     
-    nav_panel("Avancement des heures à l'échelle du projet",
+    nav_panel("Suivi des heures à l'échelle du projet",
               tableOutput("heure_echelle_saint_benoit")),
     
-    nav_panel("État d'avancement des heures ANRU",
+    nav_panel("Suivi des heures conventionnées ANRU",
               tableOutput("heure_ANRU_saint_benoit")),
 
     
@@ -223,17 +257,7 @@ navset_card_tab(
   
   
   card(
-    
-    
-    value_box( 
-      title = "", 
-      "12 bénéficiaires issus d'un QPV (33,3%)", 
-      "Dont 7 d'un QPV de Saint-Benoît",
-      showcase = bsicons::bs_icon("buildings"),
-      height = 50
-    ) ,
-    
-    
+
     value_box( 
       title = "", 
       "Bénéficiaires majoritairement masculins",
@@ -269,7 +293,7 @@ nav_panel("Saint-André - Centre Ville",
                               
                               value_box( 
                                 title = "", 
-                                "43 604 heures à réaliser à l'échelle du projet", 
+                                "22 781 heures à réaliser à l'échelle du projet", 
                                 showcase = bsicons::bs_icon("clock"),
                                 showcase_layout = "left center",
                                 theme = "primary",
@@ -278,7 +302,7 @@ nav_panel("Saint-André - Centre Ville",
                               
                               value_box( 
                                 title = "", 
-                                "49 772 heures réalisées", 
+                                "30 058,5 heures réalisées", 
                                 showcase = bsicons::bs_icon("calendar2-check"),
                                 showcase_layout = "left center",
                                 theme = "primary",
@@ -287,12 +311,13 @@ nav_panel("Saint-André - Centre Ville",
                               
                               value_box( 
                                 title = "", 
-                                "108 bénéficiaires", 
+                                "41 bénéficiaires", 
                                 theme = "primary", 
                                 class = "border",
                                 showcase = bsicons::bs_icon("person-fill-check"),
                                 height = 100
                               ) ,
+                              
                               
          ),
          
@@ -302,9 +327,10 @@ nav_panel("Saint-André - Centre Ville",
              nav_panel("Présentation",layout_column_wrap(
                plotOutput("map_saint_andré", width = 500, height = 500),
                div(style = "max-width: 300px; font-size: 0.785 rem; margin-left: 110px; white-space: pre-line;", textOutput("info_saint_andré")))),
-      
+            
              
-    
+             nav_panel("Suivi des heures conventionnées",
+                       tableOutput("heure_ANRU_saint_andre")),
            ),
            
            
@@ -312,12 +338,55 @@ nav_panel("Saint-André - Centre Ville",
            card(
              
              navset_card_tab(
-             nav_panel("Suivi des heures d'insertion à l'échelle du projet",
-                       tableOutput("heure_echelle_saint_andré")),
-             
-             nav_panel("Suivi des heures conventionnées",
-                       tableOutput("heure_ANRU_saint_andre")),
+               
+               nav_panel("Profil des bénéficiaires",
+                         card(
+                         
+                          
+                           value_box( 
+                             title = "", 
+                             "9 bénéficiaires issus d'un QPV (62,5%)", 
+                             showcase = bsicons::bs_icon("buildings"),
+                             height = 50
+                           ) ,
+                           
+                           value_box("",
+                                     "Tous les bénéficiaires sont des hommes",
+                                     showcase = bsicons::bs_icon("arrow-right"),
+                                     showcase_layout = "left center",
+                                     height = 100),
+                           
+                       
+                           value_box(title = "",
+                                     "49% des bénéficiaires ont entre 26 et 40 ans",
+                                     showcase = bsicons::bs_icon("arrow-90deg-right"),
+                                     height = 100),
+                           
+                           plotOutput("age_saint_andre", height = 150, width = 750),
+                           
+                           
+                         )
+               ),
            
+               nav_panel("Modalités d'embauche des bénéficiaires",
+                         card(
+                           
+                           value_box("",
+                                     "Type d'embauche des bénéficiaires",
+                                     showcase = bsicons::bs_icon("arrow-90deg-right"),
+                                     showcase_layout = "left center",
+                                     height = 70),
+                           plotOutput("modalite_saint_andre", height = 150, width = 750),
+                           
+                           value_box("",
+                                     "Métiers des bénéficiaires",
+                                     showcase = bsicons::bs_icon("arrow-90deg-right"),
+                                     showcase_layout = "left center",
+                                     height = 70),
+                           plotOutput("metier_saint_andre", height = 250, width = 750)
+                         )
+               ),
+               
              ),
            ),
            
@@ -365,7 +434,7 @@ nav_panel("Saint-Pierre - Bois d'olives",
                                
                                value_box( 
                                  title = "", 
-                                 "5 bénéficiaires issus d'un QPV (%)", 
+                                 "5 bénéficiaires issus d'un QPV (62,5%)", 
                                  showcase = bsicons::bs_icon("buildings"),
                                  height = 50
                                ) ,
@@ -447,7 +516,6 @@ nav_panel("Le Port - Ariste Bolon",
                                value_box( 
                                  title = "", 
                                  "30 bénéficiaires issus d'un QPV (90%)",
-                                 "Tous des QPV de Le Port",
                                  showcase = bsicons::bs_icon("buildings"),
                                  height = 50
                                ) ,
@@ -455,6 +523,7 @@ nav_panel("Le Port - Ariste Bolon",
           ),
           
           layout_column_wrap(
+            
             navset_card_tab(
               
               nav_panel("Présentation",
@@ -469,46 +538,53 @@ nav_panel("Le Port - Ariste Bolon",
             ),
             
             
-            card(
+            
+            navset_card_tab(
               
-              value_box( 
-                title = "", 
-                "Bénéficiaires majoritairement masculins",
-                showcase = bsicons::bs_icon("arrow-90deg-right"),
-                height = 100,
-              ) ,
-              
-              plotOutput("genre_le_port",height = 150, width = 550),
-              
-              value_box( 
-                title = "",
-                "20% des bénéficiaires ont moins de 41 ans",
-                showcase = bsicons::bs_icon("arrow-90deg-right"),
-                showcase_layout = "left center",
-                height = 70
-              ) ,
-              
-              plotOutput("age_le_port", height = 150),
-
-              value_box(
-                title = "",
-                "Type d'embauche des bénéficiaires",
-                showcase = bsicons::bs_icon("arrow-90deg-right"),
-                showcase_layout = "left center",
-                height = 70
+              nav_panel("Profil des bénéficiaires",
+                card(
+                  value_box( 
+                    title = "", 
+                    "Bénéficiaires majoritairement masculins",
+                    showcase = bsicons::bs_icon("arrow-90deg-right"),
+                    height = 100,
+                  ) ,
+                  
+                  plotOutput("genre_le_port",height = 150, width = 550),
+                  
+                  value_box( 
+                    title = "",
+                    "20% des bénéficiaires ont moins de 41 ans",
+                    showcase = bsicons::bs_icon("arrow-90deg-right"),
+                    showcase_layout = "left center",
+                    height = 70
+                  ) ,
+                  
+                  plotOutput("age_le_port", height = 150)
+                )
               ),
-
-              plotOutput("contrat_le_port", height = 150),
               
+              nav_panel("Modalités d'embauche des bénéficiaires",
+                card(
+                  value_box(
+                    title = "",
+                    "Type d'embauche des bénéficiaires",
+                    showcase = bsicons::bs_icon("arrow-90deg-right"),
+                    showcase_layout = "left center",
+                    height = 70
+                  ),
+
+                  plotOutput("contrat_le_port", height = 150)
+                )
+              )
               
             ),
-            
           ),
           
           
           
           
-          ),
+    ),
 ),
 
 
@@ -548,7 +624,6 @@ nav_panel("Saint-Louis - Le Gol",
                                value_box( 
                                  title = "", 
                                  "14 bénéficiaires issus d'un QPV (58%)", 
-                                 "Tous d'un QPV de Saint-Louis",
                                  showcase = bsicons::bs_icon("buildings"),
                                  height = 50, width = 500,
                                ) ,
@@ -723,6 +798,49 @@ output$heure_echelle_saint_andré <- renderTable(striped = TRUE,{heure_echelle_s
 output$objectifs_saint_andre     <- renderTable(striped = TRUE,{objectifs_saint_andre})
 output$heure_ANRU_saint_andre    <- renderTable(striped = TRUE,{heure_anru_saint_andré})
 
+# Graphiques qualitatifs pour Saint-André
+output$genre_saint_andre <- renderPlot({
+  pie <- ggplot(genre_saint_andre, aes(x = "", y = nombre, fill = genre)) +
+    geom_col(color = "black") +
+    coord_polar("y", start = 2.5) +
+    theme_void() +
+    theme(legend.position = "right", legend.title = element_blank(),
+          legend.text = element_text(size = 17)) +
+    geom_label(aes(label = pourcentage), position = position_stack(vjust = 0.7),
+               size = 5.5, show.legend = FALSE) +
+    scale_fill_manual(values = c("royalblue"))
+  pie
+}, height = 165, width = 500)
+
+output$age_saint_andre <- renderPlot({
+  ggplot(age_saint_andre, aes(x = age, y = nombre, fill = age)) +
+    geom_bar(stat = "identity", show.legend = FALSE) +
+    theme_minimal() +
+    geom_text(aes(label = pourcentage), hjust = 0.67, vjust = 1.5, color = "black", size = 7) +
+    theme(axis.title = element_blank(), axis.text.y = element_blank(), 
+          axis.text.x = element_text(size = 20)) +
+    scale_fill_manual(values = c("grey", "orange", "royalblue", "orange"))
+}, height = 150, width = 750)
+
+output$modalite_saint_andre <- renderPlot({
+  ggplot(modalite_saint_andre, aes(x = modalite, y = nombre, fill = modalite)) +
+    geom_bar(stat = "identity", show.legend = FALSE) +
+    theme_minimal() +
+    geom_text(aes(label = pourcentage), hjust = 0.5, vjust = 1.3, color = "black", size = 7) +
+    theme(axis.title = element_blank(), axis.text.y = element_blank(),
+          axis.text.x = element_text(size = 19)) +
+    scale_fill_manual(values = c("royalblue", "orange"))
+}, height = 150, width = 750)
+
+output$metier_saint_andre <- renderPlot({
+  ggplot(metier_saint_andre, aes(y = fct_inorder(metier), x = nombre, fill = metier)) +
+    geom_bar(stat = "identity", show.legend = FALSE) +
+    theme_minimal() +
+    geom_text(aes(label = pourcentage), hjust = 1.15, vjust = 0.5, color = "black", size = 7) +
+    theme(axis.title = element_blank(), axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 15)) +
+    scale_fill_manual(values = c("grey", "orange", "royalblue"))
+}, height = 250, width = 750)
 
 output$map_saint_pierre <- renderPlot({ 
     ggplot() +
@@ -810,9 +928,9 @@ output$contrat_le_port <- renderPlot({
   ggplot(contrat_le_port, aes(x = contrat, y = nombre, fill = contrat)) +
     geom_bar(stat = "identity", show.legend = FALSE) +
     theme_minimal() +
-    geom_text(aes(label = pourcentage), hjust = 0.67, vjust = 0.5, color = "black", size = 6) +
+    geom_text(aes(label = pourcentage), hjust = 0.67, vjust = .7, color = "black", size = 6.2) +
     theme(axis.title = element_blank(), axis.text.y = element_blank(),
-          axis.text.x = element_text(size = 17)) +
+          axis.text.x = element_text(size = 20)) +
     scale_fill_manual(values = c("royalblue", "orange", "grey"))
 })
 
