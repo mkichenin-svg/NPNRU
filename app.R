@@ -5,6 +5,7 @@ library(ggplot2)
 library(sf)
 library(tibble)
 library(bsicons)
+library(forcats)
 
 # Fonction pour lire CSV avec encodage UTF-8-BOM correctement
 read_csv2_utf8 <- function(file) {
@@ -833,12 +834,15 @@ output$modalite_saint_andre <- renderPlot({
 }, height = 150, width = 750)
 
 output$metier_saint_andre <- renderPlot({
-  ggplot(metier_saint_andre, aes(y = fct_inorder(metier), x = nombre, fill = metier)) +
+  metier_data <- metier_saint_andre
+  metier_data$metier <- factor(metier_data$metier, levels = c("Autre / Métier non défini", "Entretien des espaces verts", "Manoeuvre et conduite d'engins lourds de manutention"))
+  
+  ggplot(metier_data, aes(y = metier, x = nombre, fill = metier)) +
     geom_bar(stat = "identity", show.legend = FALSE) +
     theme_minimal() +
-    geom_text(aes(label = pourcentage), hjust = 1.15, vjust = 0.5, color = "black", size = 7) +
+    geom_text(aes(label = pourcentage), hjust = -0.1, vjust = 0.5, color = "black", size = 5) +
     theme(axis.title = element_blank(), axis.text.x = element_blank(),
-          axis.text.y = element_text(size = 15)) +
+          axis.text.y = element_text(size = 11)) +
     scale_fill_manual(values = c("grey", "orange", "royalblue"))
 }, height = 250, width = 750)
 
