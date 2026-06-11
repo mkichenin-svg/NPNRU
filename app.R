@@ -840,9 +840,9 @@ output$metier_saint_andre <- renderPlot({
   ggplot(metier_data, aes(y = metier, x = nombre, fill = metier)) +
     geom_bar(stat = "identity", show.legend = FALSE) +
     theme_minimal() +
-    geom_text(aes(label = pourcentage), hjust = -0.1, vjust = 0.5, color = "black", size = 5) +
+    geom_text(aes(label = pourcentage), hjust = 1.7, vjust = .5, color = "black", size = 7) +
     theme(axis.title = element_blank(), axis.text.x = element_blank(),
-          axis.text.y = element_text(size = 11)) +
+          axis.text.y = element_text(size = 14)) +
     scale_fill_manual(values = c("grey", "orange", "royalblue"))
 }, height = 250, width = 750)
 
