@@ -407,20 +407,20 @@ nav_panel("Saint-André - Centre Ville",
                           
                            value_box( 
                              title = "", 
-                             "9 bénéficiaires issus d'un QPV (62,5%)", 
+                             "9 bénéficiaires issus d'un QPV (22%)", 
                              showcase = bsicons::bs_icon("buildings"),
                              height = 50
                            ) ,
                            
                            value_box("",
-                                     "Tous les bénéficiaires sont des hommes",
+                                     "Des bénéficiaires en totalité masculins",
                                      showcase = bsicons::bs_icon("arrow-right"),
                                      showcase_layout = "left center",
                                      height = 100),
                            
                        
                            value_box(title = "",
-                                     "49% des bénéficiaires ont entre 26 et 40 ans",
+                                     "61% des bénéficiaires ont moins de 41 ans",
                                      showcase = bsicons::bs_icon("arrow-90deg-right"),
                                      height = 100),
                            
