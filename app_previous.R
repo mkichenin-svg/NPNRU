@@ -37,7 +37,6 @@ quali_le_port <- read.csv2("quali_le_port.csv", fileEncoding = "UTF-8-BOM")
 
 # Données CSV manquantes
 heures_saint_denis                  <- read_csv2_utf8("heures_saint_denis.csv")
-participants_saint_benoit           <- read_csv2_utf8("participants_saint_benoit.csv")
 heure_echelle_saint_benoit          <- read_csv2_utf8("heure_echelle_saint_benoit.csv")
 heure_ANRU_saint_benoit             <- read_csv2_utf8("heure_ANRU_saint_benoit.csv")
 heure_echelle_saint_andré           <- read_csv2_utf8("heure_echelle_saint_andré.csv")
@@ -97,34 +96,6 @@ metier_saint_andre <- data.frame(
   pourcentage = c("17,1%", "24,4%", "58,5%")
 )
 
-# Dataframes pour Saint-Benoît
-genre_saint_benoit <- data.frame(
-  genre       = c("Masculin", "Féminin"),
-  nombre      = c(35, 1),
-  pourcentage = c("97,2%", "2,8%")
-)
-
-age_saint_benoit <- data.frame(
-  age         = factor(c("moins de 26 ans", "26 - 40 ans", "41 - 50 ans", "Plus de 51 ans"),
-                       levels = c("moins de 26 ans", "26 - 40 ans", "41 - 50 ans", "Plus de 51 ans")),
-  nombre      = c(8, 18, 5, 5),
-  pourcentage = c("22,2%", "50,0%", "13,9%", "13,9%")
-)
-
-modalite_saint_benoit <- data.frame(
-  modalite    = factor(c("ETTI", "Embauche directe", "AI", "EI"),
-                       levels = c("ETTI", "Embauche directe", "AI", "EI")),
-  nombre      = c(34, 6, 1, 1),
-  pourcentage = c("81,0%", "14,3%", "2,4%", "2,4%")
-)
-
-metier_saint_benoit <- data.frame(
-  metier      = factor(c("Préparation du gros oeuvre et travaux publics", "Manoeuvre et conduite d'engins lourds", "Montage d'agencements", "Maçonnerie et béton", "Électricité et équipements", "Menuiseries et fermetures", "Engins de terrassement", "Études et autres"),
-                       levels = c("Préparation du gros oeuvre et travaux publics", "Manoeuvre et conduite d'engins lourds", "Montage d'agencements", "Maçonnerie et béton", "Électricité et équipements", "Menuiseries et fermetures", "Engins de terrassement", "Études et autres")),
-  nombre      = c(17, 6, 4, 4, 3, 4, 2, 2),
-  pourcentage = c("40,5%", "14,3%", "9,5%", "9,5%", "7,1%", "9,5%", "4,8%", "4,8%")
-)
-
 ui <- page_fillable(
   theme = theme_bootswatch("minty"),
   
@@ -140,23 +111,18 @@ ui <- page_fillable(
   # Header navbar
   tags$nav(
     class = "navbar navbar-expand-lg navbar-light bg-light w-100",
-    style = "border-bottom: 1px solid #dee2e6; position: relative; z-index: 100; padding: 10px 20px; display: flex; align-items: center; justify-content: center; min-height: 130px; gap: 0;",
-    # Logos on the left with negative margin
+    style = "border-bottom: 1px solid #dee2e6; position: relative; z-index: 100; padding: 0px 10px; display: flex; align-items: center; min-height: auto; gap: 0;",
+    # Logos on the left
     tags$div(
-      style = "position: absolute; left: 10px; display: flex; align-items: center; gap: 10px; line-height: 0.9;",
+      style = "display: flex; align-items: center; gap: 20px; line-height: 0.9; margin-top: -10px; margin-bottom: -10px;",
       tags$img(src = "img/anru.png", style = "height: 150px; object-fit: contain; display: block;"),
       tags$img(src = "img/logo_pref.png", style = "height: 90px; object-fit: contain; display: block;"),
       tags$img(src = "img/logo_mden.png", style = "height: 50px; object-fit: contain; display: block;")
     ),
-    # Title centered
+    # Title on the left
     tags$div(
-      style = "font-size: 23px; font-weight: bold; color: #2c3e50; line-height: 1; display: flex; align-items: center;",
-      "OBSERVATOIRE ANRU"
-    ),
-    # Text on the right
-    tags$div(
-      style = "position: absolute; right: 20px; top: 50%; transform: translateY(-50%); text-align: right; font-size: 14px; color: #555; max-width: 300px; line-height: 1.4;",
-      "Cette page présente un point d'étape sur la mise en œuvre du volet insertion des NPNRU de La Réunion."
+      style = "margin-left: 70px; font-size: 23px; font-weight: bold; color: #2c3e50; line-height: 1; display: flex; align-items: center; margin-top: -10px; margin-bottom: -10px;",
+      "POINT D'ÉTAPE ANRU"
     )
   ),
 
@@ -181,7 +147,7 @@ ui <- page_fillable(
     
   value_box( 
     title = "", 
-    "59 264 heures réalisées", 
+    "57 205 heures réalisées", 
     showcase = bsicons::bs_icon("calendar2-check"),
     showcase_layout = "left center",
     theme = "primary",
@@ -217,8 +183,6 @@ ui <- page_fillable(
         
         nav_panel(width=200,"Avancement des heures d'insertion",
                 tableOutput("heures_saint_denis"),
-                div(style = "font-size: 1.7rem; color: #666; margin-top: 15px; font-style: italic;", 
-                    "* Il convient également de noter que la ville de Saint-Denis nous a informé que les opérations MOA concernant la SEDRE et la SODIAC sont terminées.")
                 ),
       
       ),
@@ -273,10 +237,11 @@ nav_panel("Saint-Benoît - Rive Droite",p(layout_column_wrap(width = 200,
                                               
 ),
 
-layout_column_wrap(
+layout_column_wrap(width = 550, height = 770,
   
-  navset_card_tab(
-    
+  
+navset_card_tab(
+  
     nav_panel("Présentation",
       layout_column_wrap(
       plotOutput("map", width = 500, height = 500),
@@ -294,52 +259,26 @@ layout_column_wrap(
   
   card(
 
-    navset_card_tab(
-      
-      nav_panel("Profil des bénéficiaires",
-                card(
-                  
-                  value_box( 
-                    title = "", 
-                    "Bénéficiaires majoritairement masculins",
-                    showcase = bsicons::bs_icon("arrow-90deg-right"),
-                    height = 50,
-                  ) ,
-                  
-                  plotOutput("genre_saint_benoit", height = 170, width = 700),
-                  
-                  value_box( 
-                    title = "",
-                    "72 % des bénéficiaires ont moins de 41 ans",
-                    showcase = bsicons::bs_icon("arrow-90deg-right"),
-                    showcase_layout = "left center",
-                    height = 50
-                  ) ,
-                  
-                  plotOutput("age_saint_benoit", height = 170, width = 700)
-                )
-      ),
-      
-      nav_panel("Modalités d'embauche des bénéficiaires",
-                card(
-                  
-                  value_box("",
-                            "Type d'embauche des bénéficiaires",
-                            showcase = bsicons::bs_icon("arrow-90deg-right"),
-                            showcase_layout = "left center",
-                            height = 50),
-                  plotOutput("modalite_saint_benoit", height = 180, width = 700),
-                  
-                  value_box("",
-                            "Métiers des bénéficiaires",
-                            showcase = bsicons::bs_icon("arrow-90deg-right"),
-                            showcase_layout = "left center",
-                            height = 50),
-                  plotOutput("metier_saint_benoit", height = 280, width = 700)
-                )
-      ),
-      
-    ),
+    value_box( 
+      title = "", 
+      "Bénéficiaires majoritairement masculins",
+      showcase = bsicons::bs_icon("arrow-90deg-right"),
+      height = 10,
+    ) ,
+    
+    plotOutput("genre_saint_benoit", height = 150, width = 550),
+    
+    value_box( 
+      title = "",
+      "64 % des bénéficaires ont moins de 41 ans",
+      showcase = bsicons::bs_icon("arrow-90deg-right"),
+      showcase_layout = "left center",
+      height = 10
+    ) ,
+    
+    plotOutput("age_saint_benoit", height = 70),
+    
+    
   ),
   
 ),
@@ -767,8 +706,8 @@ server <- function(input, output) {
   # output$genre_saint_denis <- renderPlot({ genre_pie(genre) }, height = 210, width = 500)
   # output$age_saint_denis   <- renderPlot({ age_bar(age) })
   
-  output$genre_saint_benoit <- renderPlot({ genre_pie(genre_saint_benoit) }, height = 170, width = 700)
-  output$age_saint_benoit   <- renderPlot({ age_bar(age_saint_benoit) }, height = 170, width = 700)
+  output$genre_saint_benoit <- renderPlot({ genre_pie(genre) }, height = 210, width = 500)
+  output$age_saint_benoit   <- renderPlot({ age_bar(age) })
   
   # carte
   
@@ -833,43 +772,6 @@ output$echelle_LBU_saint_benoit <- renderTable(striped = TRUE,{head(echelle_LBU_
 output$echelle_NPNRU_saint_benoit <- renderTable(striped = TRUE,{head(echelle_NPNRU_saint_benoit)})
 output$heure_echelle_saint_benoit <- renderTable(striped = TRUE,{heure_echelle_saint_benoit})
 output$heure_ANRU_saint_benoit <- renderTable(striped = TRUE,{heure_ANRU_saint_benoit})
-
-# Graphiques qualitatifs pour Saint-Benoît
-output$modalite_saint_benoit <- renderPlot({
-  modalite_data <- modalite_saint_benoit
-  modalite_data$modalite <- factor(modalite_data$modalite, 
-                                   levels = c("EI", "AI", "Embauche directe", "ETTI"))
-  
-  ggplot(modalite_data, aes(y = modalite, x = nombre, fill = modalite)) +
-    geom_bar(stat = "identity", show.legend = FALSE) +
-    theme_minimal() +
-    geom_text(aes(label = pourcentage), hjust = -0.1, vjust = 0.5, color = "black", size = 6) +
-    theme(axis.title = element_blank(), axis.text.x = element_blank(),
-          axis.text.y = element_text(size = 13)) +
-    scale_fill_manual(values = c("coral", "steelblue", "orange", "royalblue")) +
-    xlim(0, max(modalite_data$nombre) * 1.2)
-}, height = 180, width = 700)
-
-output$metier_saint_benoit <- renderPlot({
-  metier_data <- metier_saint_benoit
-  metier_data$metier <- factor(metier_data$metier, 
-                               levels = c("Études et autres",
-                                        "Engins de terrassement",
-                                        "Menuiseries et fermetures",
-                                        "Électricité et équipements",
-                                        "Maçonnerie et béton",
-                                        "Montage d'agencements",
-                                        "Manoeuvre et conduite d'engins lourds",
-                                        "Préparation du gros oeuvre et travaux publics"))
-  
-  ggplot(metier_data, aes(y = metier, x = nombre, fill = metier)) +
-    geom_bar(stat = "identity", show.legend = FALSE) +
-    theme_minimal() +
-    geom_text(aes(label = pourcentage), hjust = 1, vjust = 0, color = "black", size = 6) +
-    theme(axis.title = element_blank(), axis.text.x = element_blank(),
-          axis.text.y = element_text(size = 12)) +
-    scale_fill_manual(values = c("gold", "purple", "darkgreen", "coral", "steelblue", "grey", "orange", "royalblue"))
-}, height = 280, width = 750)
   
   output$map_saint_andré <- renderPlot({ 
     ggplot() +
@@ -938,9 +840,9 @@ output$metier_saint_andre <- renderPlot({
   ggplot(metier_data, aes(y = metier, x = nombre, fill = metier)) +
     geom_bar(stat = "identity", show.legend = FALSE) +
     theme_minimal() +
-    geom_text(aes(label = pourcentage), hjust = 1, vjust = 0.5, color = "black", size = 7) +
+    geom_text(aes(label = pourcentage), hjust = -0.1, vjust = 0.5, color = "black", size = 5) +
     theme(axis.title = element_blank(), axis.text.x = element_blank(),
-          axis.text.y = element_text(size = 14)) +
+          axis.text.y = element_text(size = 11)) +
     scale_fill_manual(values = c("grey", "orange", "royalblue"))
 }, height = 250, width = 750)
 
