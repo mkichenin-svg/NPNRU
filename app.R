@@ -5,7 +5,7 @@ library(ggplot2)
 library(sf)
 library(tibble)
 library(bsicons)
-
+library(shinymanager)
 
 # Fonction pour lire CSV avec encodage UTF-8-BOM correctement
 read_csv2_utf8 <- function(file) {
@@ -126,6 +126,15 @@ metier_saint_benoit <- data.frame(
 )
 
 ui <- page_fillable(
+  
+  passwordInput(
+    "password", 
+    "mot de passe",
+    value = "mypassword1"
+  ),
+  
+  
+  
   theme = theme_bootswatch("minty"),
   
   tags$script(HTML("
@@ -744,8 +753,7 @@ nav_panel("Saint-Louis - Le Gol",
 # Define server logic required to draw a histogram ----
 server <- function(input, output) {
   
-  
-  
+  output$value <- renderText({ input$password })
   
   genre_pie <- function(df) {
     ggplot(df, aes(x="", y= nombre, fill= genre)) + geom_col(color="black") +
