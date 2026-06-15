@@ -219,12 +219,10 @@ ui <- page_fillable(
       
       navset_card_tab( 
       
-      nav_panel("Présentation",layout_column_wrap( width = 0.5,
+      nav_panel("Présentation",
+      layout_column_wrap( width = 0.5,
       plotOutput("map_saint_denis", width = 450, height = 500),
       div(style = "max-width: 280px; font-size: 0.785 rem; margin-left: 116px;white-space: pre-line;", textOutput("info_saint_denis"))))
-      
-  
-
       ),
       
       card(
@@ -232,17 +230,9 @@ ui <- page_fillable(
         nav_panel(width=200,"Avancement des heures d'insertion",
                 tableOutput("heures_saint_denis"),
                 div(style = "font-size: 1.7rem; color: #666; margin-top: 15px; font-style: italic;", 
-                    "* Il convient également de noter que la ville de Saint-Denis nous a informé que les opérations MOA concernant la SEDRE et la SODIAC sont terminées.")
-                )
-      
-      )
-     
-    )
+                    "* Il convient également de noter que la ville de Saint-Denis nous a informé que les opérations MOA concernant la SEDRE et la SODIAC sont terminées."))))
   
-  
-
- 
-)
+  )
 ),
 
 
