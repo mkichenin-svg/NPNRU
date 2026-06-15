@@ -15,7 +15,7 @@ library(ggplot2)
 library(sf)
 library(tibble)
 library(bsicons)
-library(shinymanager)
+
 
 # Charger les données précompilées (TRÈS rapide)
 # Ces données ont été générées une fois avec load_data.R
