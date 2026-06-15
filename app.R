@@ -220,9 +220,7 @@ ui <- page_fillable(
         nav_panel(width=200,"Avancement des heures d'insertion",
                 tableOutput("heures_saint_denis"),
                 div(style = "font-size: 1.7rem; color: #666; margin-top: 15px; font-style: italic;", 
-                    "* Il convient également de noter que la ville de Saint-Denis nous a informé que les opérations MOA concernant la SEDRE et la SODIAC sont terminées."))))
-  
-  )
+                    "* Il convient également de noter que la ville de Saint-Denis nous a informé que les opérations MOA concernant la SEDRE et la SODIAC sont terminées.")))))
 ),
 
 
