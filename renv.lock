@@ -2831,7 +2831,12 @@
     "shinymanager": {
       "Package": "shinymanager",
       "Version": "1.0.410",
-      "Source": "Repository",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "shinymanager",
+      "RemoteUsername": "datastorm-open",
+      "RemoteRef": "master",
       "Title": "Authentication Management for 'Shiny' Applications",
       "Authors@R": "c( person(\"Benoit\", \"Thieurmel\", email = \"bthieurmel@gmail.com\", role = c(\"aut\", \"cre\")), person(\"Victor\", \"Perrier\", email = \"victor.perrier@dreamRs.fr\", role = c(\"aut\")) )",
       "Description": "Simple and secure authentification mechanism for single 'Shiny' applications. Credentials are stored in an encrypted 'SQLite' database. Source code of main application is protected until authentication is successful.",
@@ -2860,8 +2865,7 @@
       "VignetteBuilder": "knitr",
       "NeedsCompilation": "no",
       "Author": "Benoit Thieurmel [aut, cre], Victor Perrier [aut]",
-      "Maintainer": "Benoit Thieurmel <bthieurmel@gmail.com>",
-      "Repository": "CRAN"
+      "Maintainer": "Benoit Thieurmel <bthieurmel@gmail.com>"
     },
     "sourcetools": {
       "Package": "sourcetools",
