@@ -1,13 +1,3 @@
-# Configurer le miroir CRAN
-options(repos = c(CRAN = "https://cran.rstudio.com/"))
-
-# Installer les dépendances GitHub si nécessaire
-if (!requireNamespace("shinymanager", quietly = TRUE)) {
-  if (!requireNamespace("remotes", quietly = TRUE)) {
-    install.packages("remotes", repos = "https://cran.rstudio.com/")
-  }
-  remotes::install_github("datastorm-open/shinymanager", upgrade = "never")
-}
 
 library(shiny)
 library(bslib)
