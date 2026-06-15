@@ -17,46 +17,47 @@ library(tibble)
 library(bsicons)
 library(shinymanager)
 
+# Charger les données précompilées (TRÈS rapide)
+# Ces données ont été générées une fois avec load_data.R
+if (file.exists("app_data.Rdata")) {
+  load("app_data.Rdata", envir = .GlobalEnv)
+} else {
+  # Fallback : charger depuis les fichiers bruts si app_data.Rdata n'existe pas
+  # (moins performant mais plus robuste)
+  
+  read_csv2_utf8 <- function(file) {
+    con <- file(file, "r", encoding = "UTF-8")
+    on.exit(close(con))
+    df <- read.csv2(con, stringsAsFactors = FALSE)
+    lines <- readLines(file, n = 1, encoding = "UTF-8")
+    lines <- gsub("^\xef\xbb\xbf", "", lines)
+    col_names <- strsplit(lines, ";")[[1]]
+    colnames(df) <- col_names
+    df
+  }
 
-# Fonction pour lire CSV avec encodage UTF-8-BOM correctement
-read_csv2_utf8 <- function(file) {
-  # Lire en UTF-8
-  con <- file(file, "r", encoding = "UTF-8")
-  on.exit(close(con))
-  df <- read.csv2(con, stringsAsFactors = FALSE)
-  # Corriger les noms de colonnes en lisant directement le fichier texte
-  lines <- readLines(file, n = 1, encoding = "UTF-8")
-  # Supprimer le BOM si présent
-  lines <- gsub("^\xef\xbb\xbf", "", lines)
-  col_names <- strsplit(lines, ";")[[1]]
-  colnames(df) <- col_names
-  df
+  shapefile  <- read_sf("QPV/quartiers-prioritaires-de-la-politique-de-la-ville-qpv.shp")
+  shapefile1 <- read_sf("communes/communesPolygon.shp")
+  shapefile2 <- read_sf("QPV2/quartiers-prioritaires-de-la-politique-de-la-ville-qpv.shp")
+
+  iris  <- read_sf("iris/georef-france-iris-millesime.shp")
+  iris2 <- read_sf("iris2/georef-france-iris-millesime.shp")
+
+  genre <- read.csv2("genre.csv")
+  age <- read.csv2("age.csv")
+  quali_le_port <- read.csv2("quali_le_port.csv", fileEncoding = "UTF-8-BOM")
+
+  heures_saint_denis                  <- read_csv2_utf8("heures_saint_denis.csv")
+  participants_saint_benoit           <- read_csv2_utf8("participants_saint_benoit.csv")
+  heure_echelle_saint_benoit          <- read_csv2_utf8("heure_echelle_saint_benoit.csv")
+  heure_ANRU_saint_benoit             <- read_csv2_utf8("heure_ANRU_saint_benoit.csv")
+  heure_echelle_saint_andré           <- read_csv2_utf8("heure_echelle_saint_andré.csv")
+  heure_anru_saint_andré              <- read_csv2_utf8("heure_anru_saint_andré.csv")
+  heure_conventionné_saint_pierre     <- read_csv2_utf8("heure_conventionné_saint_pierre.csv")
+  heure_non_conventionné_saint_pierre <- read_csv2_utf8("heure_non_conventionné_saint_pierre.csv")
+  heures_le_port                      <- read_csv2_utf8("heures_le_port.csv")
+  heure_saint_louis1                  <- read_csv2_utf8("heure_saint_louis1.csv")
 }
-
-shapefile <-read_sf("QPV/quartiers-prioritaires-de-la-politique-de-la-ville-qpv.shp")
-shapefile1 <-read_sf("communes/communesPolygon.shp")
-shapefile2 <- read_sf("QPV2/quartiers-prioritaires-de-la-politique-de-la-ville-qpv.shp")
-
-iris <- read_sf("iris/georef-france-iris-millesime.shp")
-iris2 <- read_sf("iris2/georef-france-iris-millesime.shp")
-
-genre <- read.csv2("genre.csv")
-age <- read.csv2("age.csv")
-
-
-quali_le_port <- read.csv2("quali_le_port.csv", fileEncoding = "UTF-8-BOM")
-
-# Données CSV manquantes
-heures_saint_denis                  <- read_csv2_utf8("heures_saint_denis.csv")
-participants_saint_benoit           <- read_csv2_utf8("participants_saint_benoit.csv")
-heure_echelle_saint_benoit          <- read_csv2_utf8("heure_echelle_saint_benoit.csv")
-heure_ANRU_saint_benoit             <- read_csv2_utf8("heure_ANRU_saint_benoit.csv")
-heure_echelle_saint_andré           <- read_csv2_utf8("heure_echelle_saint_andré.csv")
-heure_anru_saint_andré              <- read_csv2_utf8("heure_anru_saint_andré.csv")
-heure_conventionné_saint_pierre     <- read_csv2_utf8("heure_conventionné_saint_pierre.csv")
-heure_non_conventionné_saint_pierre <- read_csv2_utf8("heure_non_conventionné_saint_pierre.csv")
-heures_le_port                      <- read_csv2_utf8("heures_le_port.csv")
-heure_saint_louis1                  <- read_csv2_utf8("heure_saint_louis1.csv")
 
 
 
