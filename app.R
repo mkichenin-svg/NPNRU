@@ -1,3 +1,10 @@
+# Installer les dépendances GitHub si nécessaire
+if (!requireNamespace("shinymanager", quietly = TRUE)) {
+  if (!requireNamespace("remotes", quietly = TRUE)) {
+    install.packages("remotes")
+  }
+  remotes::install_github("datastorm-open/shinymanager", upgrade = "never")
+}
 
 library(shiny)
 library(bslib)
