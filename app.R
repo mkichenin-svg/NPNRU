@@ -216,7 +216,7 @@ ui <- page_fillable(
     class = "border",
     showcase = bsicons::bs_icon("person-fill-check"),
     height = 100
-  ) ,
+  ) 
   
   ),
     
@@ -228,7 +228,7 @@ ui <- page_fillable(
       
       nav_panel("Présentation",layout_column_wrap( width = 0.5,
       plotOutput("map_saint_denis", width = 450, height = 500),
-      div(style = "max-width: 280px; font-size: 0.785 rem; margin-left: 116px;white-space: pre-line;", textOutput("info_saint_denis")))),
+      div(style = "max-width: 280px; font-size: 0.785 rem; margin-left: 116px;white-space: pre-line;", textOutput("info_saint_denis"))))
       
   
 
@@ -240,11 +240,11 @@ ui <- page_fillable(
                 tableOutput("heures_saint_denis"),
                 div(style = "font-size: 1.7rem; color: #666; margin-top: 15px; font-style: italic;", 
                     "* Il convient également de noter que la ville de Saint-Denis nous a informé que les opérations MOA concernant la SEDRE et la SODIAC sont terminées.")
-                ),
+                )
       
-      ),
+      )
      
-    ),
+    )
   
   
 
@@ -290,7 +290,7 @@ nav_panel("Saint-Benoît - Rive Droite",p(layout_column_wrap(width = 200,
                                                 "12 bénéficiaires issus d'un QPV (33,3%)", 
                                                 showcase = bsicons::bs_icon("buildings"),
                                                 height = 50
-                                              ) ,
+                                              ) 
                                               
 ),
 
@@ -307,7 +307,7 @@ layout_column_wrap(
               tableOutput("heure_echelle_saint_benoit")),
     
     nav_panel("Suivi des heures conventionnées ANRU",
-              tableOutput("heure_ANRU_saint_benoit")),
+              tableOutput("heure_ANRU_saint_benoit"))
 
     
   ),
@@ -324,7 +324,7 @@ layout_column_wrap(
                     title = "", 
                     "Bénéficiaires majoritairement masculins",
                     showcase = bsicons::bs_icon("arrow-90deg-right"),
-                    height = 50,
+                    height = 50
                   ) ,
                   
                   plotOutput("genre_saint_benoit", height = 170, width = 700),
@@ -358,14 +358,14 @@ layout_column_wrap(
                             height = 50),
                   plotOutput("metier_saint_benoit", height = 280, width = 700)
                 )
-      ),
+      )
       
-    ),
-  ),
+    )
+  )
   
-),
+)
 
-),
+)
 ),
 
 #page Saint-André - Centre ville
@@ -399,7 +399,7 @@ nav_panel("Saint-André - Centre Ville",
                                 class = "border",
                                 showcase = bsicons::bs_icon("person-fill-check"),
                                 height = 100
-                              ) ,
+                              ) 
                               
                               
          ),
@@ -413,7 +413,7 @@ nav_panel("Saint-André - Centre Ville",
             
              
              nav_panel("Suivi des heures conventionnées",
-                       tableOutput("heure_ANRU_saint_andre")),
+                       tableOutput("heure_ANRU_saint_andre"))
            ),
            
            
@@ -445,7 +445,7 @@ nav_panel("Saint-André - Centre Ville",
                                      showcase = bsicons::bs_icon("arrow-90deg-right"),
                                      height = 100),
                            
-                           plotOutput("age_saint_andre", height = 150, width = 750),
+                           plotOutput("age_saint_andre", height = 150, width = 750)
                            
                            
                          )
@@ -468,12 +468,12 @@ nav_panel("Saint-André - Centre Ville",
                                      height = 70),
                            plotOutput("metier_saint_andre", height = 250, width = 750)
                          )
-               ),
+               )
                
-             ),
-           ),
+             )
+           )
            
-         ),
+         )
          
         
          
@@ -520,7 +520,7 @@ nav_panel("Saint-Pierre - Bois d'olives",
                                  "5 bénéficiaires issus d'un QPV (62,5%)", 
                                  showcase = bsicons::bs_icon("buildings"),
                                  height = 50
-                               ) ,
+                               ) 
                                
           ),
           
@@ -531,7 +531,7 @@ nav_panel("Saint-Pierre - Bois d'olives",
               nav_panel("Présentation",
                         layout_column_wrap(
                 plotOutput("map_saint_pierre", width = 400, height = 500),
-                div(style = "max-width: 300px; font-size: 0.785 rem; margin-left: 110px; white-space: pre-line;", textOutput("info_saint_pierre")))),
+                div(style = "max-width: 300px; font-size: 0.785 rem; margin-left: 110px; white-space: pre-line;", textOutput("info_saint_pierre"))))
               
             
             ),
@@ -546,21 +546,21 @@ nav_panel("Saint-Pierre - Bois d'olives",
              
                 
                 nav_panel("Suivi des heures non conventionnées",
-                          tableOutput("heure_non_conventionne_saint_pierre")),
+                          tableOutput("heure_non_conventionne_saint_pierre"))
                 
                
-              ),
+              )
              
               
         
-            ),
+            )
             
-          ),
+          )
           
           
         
           
-          ),
+          )
 ),
 
 #page le Port
@@ -601,7 +601,7 @@ nav_panel("Le Port - Ariste Bolon",
                                  "30 bénéficiaires issus d'un QPV (90%)",
                                  showcase = bsicons::bs_icon("buildings"),
                                  height = 50
-                               ) ,
+                               ) 
                                
           ),
           
@@ -616,7 +616,7 @@ nav_panel("Le Port - Ariste Bolon",
                   
               
               nav_panel("Suivi des heures d'insertion",
-                        tableOutput("heures_le_port")),
+                        tableOutput("heures_le_port"))
               
             ),
             
@@ -630,7 +630,7 @@ nav_panel("Le Port - Ariste Bolon",
                     title = "", 
                     "Bénéficiaires majoritairement masculins",
                     showcase = bsicons::bs_icon("arrow-90deg-right"),
-                    height = 100,
+                    height = 100
                   ) ,
                   
                   plotOutput("genre_le_port",height = 150, width = 550),
@@ -661,13 +661,13 @@ nav_panel("Le Port - Ariste Bolon",
                 )
               )
               
-            ),
-          ),
+            )
+          )
           
           
           
           
-    ),
+    )
 ),
 
 
@@ -708,8 +708,8 @@ nav_panel("Saint-Louis - Le Gol",
                                  title = "", 
                                  "14 bénéficiaires issus d'un QPV (58%)", 
                                  showcase = bsicons::bs_icon("buildings"),
-                                 height = 50, width = 500,
-                               ) ,
+                                 height = 50, width = 500
+                               ) 
                                
                                
           ),
@@ -721,7 +721,7 @@ nav_panel("Saint-Louis - Le Gol",
               nav_panel("Présentation",
                         layout_column_wrap(
                           plotOutput("map_saint_louis", width = 500, height = 500),
-                          div(style = "max-width: 300px; font-size: 0.785 rem; margin-left: 110px; white-space: pre-line;", textOutput("info_saint_louis")))),
+                          div(style = "max-width: 300px; font-size: 0.785 rem; margin-left: 110px; white-space: pre-line;", textOutput("info_saint_louis"))))
               
             
             ),
@@ -737,20 +737,20 @@ nav_panel("Saint-Louis - Le Gol",
                 
                
                 nav_panel("Suivi des heures d'insertion à l'échelle du projet",
-                          tableOutput("heure_saint_louis1")),
+                          tableOutput("heure_saint_louis1"))
                 
-              ),
+              )
               
             
               
-            ),
+            )
             
-          ),
+          )
           
           
          
           
-          ),
+          )
 ),
 
 
