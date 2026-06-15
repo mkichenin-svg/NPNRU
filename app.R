@@ -17,14 +17,7 @@ library(tibble)
 library(bsicons)
 
 
-# Charger les données précompilées (TRÈS rapide)
-# Ces données ont été générées une fois avec load_data.R
-if (file.exists("app_data.Rdata")) {
-  load("app_data.Rdata", envir = .GlobalEnv)
-} else {
-  # Fallback : charger depuis les fichiers bruts si app_data.Rdata n'existe pas
-  # (moins performant mais plus robuste)
-  
+
   read_csv2_utf8 <- function(file) {
     con <- file(file, "r", encoding = "UTF-8")
     on.exit(close(con))
@@ -57,7 +50,7 @@ if (file.exists("app_data.Rdata")) {
   heure_non_conventionné_saint_pierre <- read_csv2_utf8("heure_non_conventionné_saint_pierre.csv")
   heures_le_port                      <- read_csv2_utf8("heures_le_port.csv")
   heure_saint_louis1                  <- read_csv2_utf8("heure_saint_louis1.csv")
-}
+
 
 
 
@@ -751,7 +744,7 @@ nav_panel("Saint-Louis - Le Gol",
          
           
           )
-),
+)
 
 
 
