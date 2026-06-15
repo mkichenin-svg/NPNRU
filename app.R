@@ -5,7 +5,7 @@ library(ggplot2)
 library(sf)
 library(tibble)
 library(bsicons)
-
+library(shinymanager)
 
 
 # Fonction pour lire CSV avec encodage UTF-8-BOM correctement
