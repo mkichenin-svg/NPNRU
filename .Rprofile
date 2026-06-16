@@ -1,3 +1,4 @@
+source("renv/activate.R")
 # Ce fichier s'exécute au démarrage de R
 # Il installe les dépendances nécessaires, notamment shinymanager depuis GitHub
 

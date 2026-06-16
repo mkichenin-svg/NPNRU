@@ -6,6 +6,7 @@ library(sf)
 library(tibble)
 library(bsicons)
 library(rsconnect)
+library(remotes)
 
 
 
@@ -25,6 +26,7 @@ library(rsconnect)
   shapefile2 <- read_sf("QPV2/quartiers-prioritaires-de-la-politique-de-la-ville-qpv.shp")
 
   iris  <- read_sf("iris/georef-france-iris-millesime.shp")
+  
   iris2 <- read_sf("iris2/georef-france-iris-millesime.shp")
 
   genre <- read.csv2("genre.csv")
@@ -145,9 +147,9 @@ ui <- page_fillable(
     # Logos on the left with negative margin
     tags$div(
       style = "position: absolute; left: 10px; display: flex; align-items: center; gap: 10px; line-height: 0.9;",
-      tags$img(src = "img/anru.png", style = "height: 150px; object-fit: contain; display: block;"),
-      tags$img(src = "img/logo_pref.png", style = "height: 90px; object-fit: contain; display: block;"),
-      tags$img(src = "img/logo_mden.png", style = "height: 50px; object-fit: contain; display: block;")
+      tags$img(src = "anru.png", style = "height: 150px; object-fit: contain; display: block;"),
+      tags$img(src = "logo_pref.png", style = "height: 90px; object-fit: contain; display: block;"),
+      tags$img(src = "logo_mden.png", style = "height: 50px; object-fit: contain; display: block;")
     ),
     # Title centered
     tags$div(
