@@ -1573,10 +1573,12 @@
         "Built": "R 4.6.0; x86_64-w64-mingw32; 2026-06-09 01:59:42 UTC; windows",
         "Archs": "x64",
         "RemoteType": "standard",
-        "RemotePkgRef": "htmltools",
         "RemoteRef": "htmltools",
+        "RemotePkgRef": "htmltools",
         "RemoteRepos": "https://cran.rstudio.com",
-        "RemoteSha.Version": "0.5.9"
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-w64-mingw32",
+        "RemoteSha": "0.5.9"
       }
     },
     "htmlwidgets": {
@@ -1606,10 +1608,12 @@
         "Date/Publication": "2023-12-06 06:00:06 UTC",
         "Built": "R 4.6.0; ; 2026-06-09 03:13:45 UTC; windows",
         "RemoteType": "standard",
-        "RemotePkgRef": "htmlwidgets",
         "RemoteRef": "htmlwidgets",
+        "RemotePkgRef": "htmlwidgets",
         "RemoteRepos": "https://cran.rstudio.com",
-        "RemoteSha.Version": "1.6.4"
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-w64-mingw32",
+        "RemoteSha": "1.6.4"
       }
     },
     "httpuv": {
@@ -3536,8 +3540,11 @@
     ".RDataTmp7": {
       "checksum": "5a7ff92cc22cd756c77f6fcac4086c9f"
     },
+    ".RDataTmp8": {
+      "checksum": "7cf83f3b84b9f886f0eda91c8719d3d1"
+    },
     ".Rprofile": {
-      "checksum": "c6952d9559bc1586449c26b82e58bad4"
+      "checksum": "f5ed8b6ae9c0d90ab6ba8c6fd37b5467"
     },
     "age.csv": {
       "checksum": "6165e0199db2d21b9f518d507d6f1810"
@@ -3549,7 +3556,7 @@
       "checksum": "bb610882105a0139d104fc90d15cdb89"
     },
     "app.R": {
-      "checksum": "d28a409e20dd375b2c15aeebb273010e"
+      "checksum": "cba877688a73376b25adcc48a46e8a34"
     },
     "app_data.Rdata": {
       "checksum": "cb0bcbc55a81ac50f488c207c82da51b"
