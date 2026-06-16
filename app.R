@@ -7,7 +7,9 @@ library(tibble)
 library(bsicons)
 library(rsconnect)
 library(remotes)
-
+library(htmlwidgets)
+library(htmltools)
+library(shinymanager)
 
 
   read_csv2_utf8 <- function(file) {
@@ -125,10 +127,6 @@ metier_saint_benoit <- data.frame(
 
 ui <- page_fillable(
   
- 
-  
-  
-  
   theme = theme_bootswatch("minty"),
   
   tags$script(HTML("
@@ -145,16 +143,17 @@ ui <- page_fillable(
     class = "navbar navbar-expand-lg navbar-light bg-light w-100",
     style = "border-bottom: 1px solid #dee2e6; position: relative; z-index: 100; padding: 10px 20px; display: flex; align-items: center; justify-content: center; min-height: 130px; gap: 0;",
     # Logos on the left with negative margin
+  
     tags$div(
       style = "position: absolute; left: 10px; display: flex; align-items: center; gap: 10px; line-height: 0.9;",
-      tags$img(src = "anru.png", style = "height: 150px; object-fit: contain; display: block;"),
-      tags$img(src = "logo_pref.png", style = "height: 90px; object-fit: contain; display: block;"),
-      tags$img(src = "logo_mden.png", style = "height: 50px; object-fit: contain; display: block;")
+      tags$img(src = "img/anru.png", style = "height: 150px; object-fit: contain; display: block;"),
+      tags$img(src = "img/logo_pref.png", style = "height: 90px; object-fit: contain; display: block;"),
+      tags$img(src = "img/logo_mden.png", style = "height: 50px; object-fit: contain; display: block;")
     ),
     # Title centered
     tags$div(
       style = "font-size: 23px; font-weight: bold; color: #2c3e50; line-height: 1; display: flex; align-items: center;",
-      "OBSERVATOIRE ANRU"
+      "OBSERVATOIRE ANRU-NPNRU DE LA RÉUNION"
     ),
     # Text on the right
     tags$div(
@@ -736,7 +735,13 @@ nav_panel("Saint-Louis - Le Gol",
 # Define server logic required to draw a histogram ----
 server <- function(input, output) {
   
+  
   output$value <- renderText({ input$password })
+  
+  output$image1 <- renderImage({ 
+    list(src = "anru.png", height = "25%") 
+  }, 
+  deleteFile = FALSE)
   
   genre_pie <- function(df) {
     ggplot(df, aes(x="", y= nombre, fill= genre)) + geom_col(color="black") +
