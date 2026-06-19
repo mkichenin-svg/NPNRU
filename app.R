@@ -10,6 +10,8 @@ library(remotes)
 library(htmlwidgets)
 library(htmltools)
 library(shinymanager)
+library(shinyauthr)
+
 
 
   read_csv2_utf8 <- function(file) {
@@ -36,18 +38,24 @@ library(shinymanager)
   quali_le_port <- read.csv2("quali_le_port.csv", fileEncoding = "UTF-8-BOM")
 
   heures_saint_denis                  <- read_csv2_utf8("heures_saint_denis.csv")
+  heures_saint_denis_anru             <- read_csv2_utf8("heures_saint_denis_conventionnées.csv")
+  
   participants_saint_benoit           <- read_csv2_utf8("participants_saint_benoit.csv")
   heure_echelle_saint_benoit          <- read_csv2_utf8("heure_echelle_saint_benoit.csv")
   heure_ANRU_saint_benoit             <- read_csv2_utf8("heure_ANRU_saint_benoit.csv")
+  
   heure_echelle_saint_andré           <- read_csv2_utf8("heure_echelle_saint_andré.csv")
   heure_anru_saint_andré              <- read_csv2_utf8("heure_anru_saint_andré.csv")
+  
   heure_conventionné_saint_pierre     <- read_csv2_utf8("heure_conventionné_saint_pierre.csv")
   heure_non_conventionné_saint_pierre <- read_csv2_utf8("heure_non_conventionné_saint_pierre.csv")
+  heure_echelle_saint_pierre          <- read_csv2_utf8("heure_echelle_saint_pierre.csv")
+  
   heures_le_port                      <- read_csv2_utf8("heures_le_port.csv")
-  heure_saint_louis1                  <- read_csv2_utf8("heure_saint_louis1.csv")
-
-
-
+  heures_le_port_conventionnées       <- read_csv2_utf8("heures_le_port_conventionnées.csv")
+  
+  heure_saint_louis1                  <- read_csv2_utf8("heure_saint_louis1.csv") 
+  heure_saint_louis_conventionnées    <- read_csv2_utf8("heure_saint_louis_conventionnées.csv") 
 
 genre_le_port <- data.frame(
   genre       = c("Masculin", "Féminin"),
@@ -125,10 +133,21 @@ metier_saint_benoit <- data.frame(
   pourcentage = c("40,5%", "14,3%", "9,5%", "9,5%", "7,1%", "9,5%", "4,8%", "4,8%")
 )
 
+uiOutput("code")
+
+
 ui <- page_fillable(
   
-  theme = theme_bootswatch("minty"),
+  # logout button
+  div(class = "pull-right", shinyauthr::logoutUI(id = "logout")),
   
+  # login section
+  shinyauthr::loginUI(id = "login"),
+
+
+    theme = theme_bootswatch("minty"),
+  
+
   tags$script(HTML("
     document.addEventListener('DOMContentLoaded', function() {
       // Remove all title attributes that might contain 'toggle'
@@ -162,10 +181,13 @@ ui <- page_fillable(
     )
   ),
 
-  # Tabbed content
-  navset_card_tab(
-    id = "main_tabs",
   
+  # Tabbed content
+
+  navset_card_tab(
+    
+    id = "main_tabs",
+    
   # Page saint-denis
   
   nav_panel("Saint-Denis - Prunel",p(
@@ -174,7 +196,7 @@ ui <- page_fillable(
     
     value_box( 
       title = "", 
-      "74 615 heures à réaliser à l'échelle du projet", 
+      "73 965 heures conventionnées à réaliser", 
       showcase = bsicons::bs_icon("clock"),
       showcase_layout = "left center",
       theme = "primary",
@@ -183,7 +205,7 @@ ui <- page_fillable(
     
   value_box( 
     title = "", 
-    "59 264 heures réalisées", 
+    "58 605 heures réalisées", 
     showcase = bsicons::bs_icon("calendar2-check"),
     showcase_layout = "left center",
     theme = "primary",
@@ -197,31 +219,118 @@ ui <- page_fillable(
     class = "border",
     showcase = bsicons::bs_icon("person-fill-check"),
     height = 100
-  ) 
+    ),
+  
+  
+  value_box( 
+    title = "", 
+    "Bénéficiaires issus d'un QPV : NC", 
+    showcase = bsicons::bs_icon("buildings"),
+    height = 50
+  ) ,
   
   ),
     
-
-  
-    layout_column_wrap(
-      
+layout_column_wrap(
+    
+     card(
+     
       navset_card_tab( 
       
       nav_panel("Présentation",
-      layout_column_wrap( width = 0.5,
-      plotOutput("map_saint_denis", width = 450, height = 500),
-      div(style = "max-width: 280px; font-size: 0.785 rem; margin-left: 116px;white-space: pre-line;", textOutput("info_saint_denis"))))
-      ),
+                layout_column_wrap( width = 0.5,
+                                    plotOutput("map_saint_denis", width = 450, height = 500),
+                                    div(style = "max-width: 280px; font-size: 0.785 rem; margin-left: 116px;white-space: pre-line;", textOutput("info_saint_denis")))),
       
-      card(
-        
-        nav_panel(width=200,"Avancement des heures d'insertion",
+      nav_panel("Suivi des heures conventionnées ANRU/LBU",
+                tableOutput("heures_saint_denis_anru"),
+                div(style = "font-size: 1.7rem; color: #666; margin-top: 15px; font-style: italic;", 
+                    "* Il convient également de noter que la ville de Saint-Denis nous a informé que les opérations MOA concernant la SEDRE et la SODIAC sont terminées.")),
+    
+      nav_panel("Suivi des heures à l'échelle du projet",
                 tableOutput("heures_saint_denis"),
                 div(style = "font-size: 1.7rem; color: #666; margin-top: 15px; font-style: italic;", 
-                    "* Il convient également de noter que la ville de Saint-Denis nous a informé que les opérations MOA concernant la SEDRE et la SODIAC sont terminées.")))))
-
+                              "* Il convient également de noter que la ville de Saint-Denis nous a informé que les opérations MOA concernant la SEDRE et la SODIAC sont terminées.")),
+      
+       ),
+    ),
+      
+     card(
+    
+      navset_card_tab(
+      
+      nav_panel("Profil des bénéficiaires",
+                
+                br(),
+                br(),
+                
+                card(
+                  value_box( 
+                    title = "",
+                    "DONNÉES QUALITATIVES MOMENTANÉMENT INDISPONIBLES",
+                    showcase = bsicons::bs_icon("info-circle"),
+                    showcase_layout = "left center",
+                    height = 50) ,
+           br(),
+           br(),
+           
+           p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
+           br(),
+           tags$ul(
+             tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville, …"),
+             br(),
+             tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques…"),
+             br(),
+             tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité…"),
+             
+           ),
+        ),
+     ),
+     
+   
+     
+     nav_panel("Modalités de réalisation des heures",
+               
+               br(),
+               br(),
+               
+               card(
+                 value_box( 
+                   title = "",
+                   "DONNÉES QUALITATIVES MOMENTANÉMENT INDISPONIBLES",
+                   showcase = bsicons::bs_icon("info-circle"),
+                   showcase_layout = "left center",
+                   height = 50
+            ) ,
+            
+            br(),
+            br(),
+  
+            p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
+              br(),
+            tags$ul(
+              tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville, …"),
+              br(),
+              tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques…"),
+              br(),
+              tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité…"),
+              
+             
+            )
+        ),
+     ),    
+     
+     
+   
+       ),
+    ),   
 ),
+  
+      ),
+    ),
+     
 
+      
 
 ## Page 2
 
@@ -229,7 +338,7 @@ nav_panel("Saint-Benoît - Rive Droite",p(layout_column_wrap(width = 200,
                                               
                                               value_box( 
                                                 title = "", 
-                                                "34 025 heures à réaliser à l'échelle du projet", 
+                                                "19 726 heures conventionnées à réaliser", 
                                                 showcase = bsicons::bs_icon("clock"),
                                                 showcase_layout = "left center",
                                                 theme = "primary",
@@ -238,8 +347,7 @@ nav_panel("Saint-Benoît - Rive Droite",p(layout_column_wrap(width = 200,
                                               
                                               value_box( 
                                                 title = "", 
-                                                "14 863 heures réalisées", 
-                                                "44% des objectifs conventionnés ANRU / LBU", 
+                                                "12 169,5 heures réalisées", 
                                                 showcase = bsicons::bs_icon("calendar2-check"),
                                                 showcase_layout = "left center",
                                                 theme = "primary",
@@ -273,12 +381,13 @@ layout_column_wrap(
       plotOutput("map", width = 500, height = 500),
       div(style = "max-width: 300px; font-size: 0.785 rem; margin-left: 110px; white-space: pre-line;", textOutput("info_saint_benoit")))),
     
-    nav_panel("Suivi des heures à l'échelle du projet",
-              tableOutput("heure_echelle_saint_benoit")),
+    nav_panel("Suivi des heures conventionnées ANRU/LBU",
+              tableOutput("heure_ANRU_saint_benoit")),
     
-    nav_panel("Suivi des heures conventionnées ANRU",
-              tableOutput("heure_ANRU_saint_benoit"))
-
+    nav_panel("Suivi des heures à l'échelle du projet",
+              tableOutput("heure_echelle_saint_benoit"))
+    
+   
     
   ),
   
@@ -293,7 +402,7 @@ layout_column_wrap(
                   value_box( 
                     title = "", 
                     "Bénéficiaires majoritairement masculins",
-                    showcase = bsicons::bs_icon("arrow-90deg-right"),
+                    showcase = bsicons::bs_icon("arrow-right"),
                     height = 50
                   ) ,
                   
@@ -302,7 +411,7 @@ layout_column_wrap(
                   value_box( 
                     title = "",
                     "72 % des bénéficiaires ont moins de 41 ans",
-                    showcase = bsicons::bs_icon("arrow-90deg-right"),
+                    showcase = bsicons::bs_icon("arrow-right"),
                     showcase_layout = "left center",
                     height = 50
                   ) ,
@@ -311,19 +420,19 @@ layout_column_wrap(
                 )
       ),
       
-      nav_panel("Modalités d'embauche des bénéficiaires",
+      nav_panel("Modalités de réalisation des heures",
                 card(
                   
                   value_box("",
                             "Type d'embauche des bénéficiaires",
-                            showcase = bsicons::bs_icon("arrow-90deg-right"),
+                            showcase = bsicons::bs_icon("arrow-right"),
                             showcase_layout = "left center",
                             height = 50),
                   plotOutput("modalite_saint_benoit", height = 180, width = 700),
                   
                   value_box("",
                             "Métiers des bénéficiaires",
-                            showcase = bsicons::bs_icon("arrow-90deg-right"),
+                            showcase = bsicons::bs_icon("arrow-right"),
                             showcase_layout = "left center",
                             height = 50),
                   plotOutput("metier_saint_benoit", height = 280, width = 700)
@@ -346,7 +455,7 @@ nav_panel("Saint-André - Centre Ville",
                               
                               value_box( 
                                 title = "", 
-                                "22 781 heures à réaliser à l'échelle du projet", 
+                                "22 781 heures conventionnées à réaliser", 
                                 showcase = bsicons::bs_icon("clock"),
                                 showcase_layout = "left center",
                                 theme = "primary",
@@ -369,7 +478,15 @@ nav_panel("Saint-André - Centre Ville",
                                 class = "border",
                                 showcase = bsicons::bs_icon("person-fill-check"),
                                 height = 100
-                              ) 
+                              ),
+                              
+                              
+                              value_box( 
+                                title = "", 
+                                "9 bénéficiaires issus d'un QPV (22%)", 
+                                showcase = bsicons::bs_icon("buildings"),
+                                height = 50
+                              ) ,
                               
                               
          ),
@@ -382,8 +499,11 @@ nav_panel("Saint-André - Centre Ville",
                div(style = "max-width: 300px; font-size: 0.785 rem; margin-left: 110px; white-space: pre-line;", textOutput("info_saint_andré")))),
             
              
-             nav_panel("Suivi des heures conventionnées",
-                       tableOutput("heure_ANRU_saint_andre"))
+             nav_panel("Suivi des heures conventionnées ANRU/LBU",
+                       tableOutput("heure_anru_saint_andré")),
+             
+             nav_panel("Suivi des heures à l'échelle du projet",
+                       tableOutput("heure_echelle_saint_andré")),
            ),
            
            
@@ -395,13 +515,6 @@ nav_panel("Saint-André - Centre Ville",
                nav_panel("Profil des bénéficiaires",
                          card(
                          
-                          
-                           value_box( 
-                             title = "", 
-                             "9 bénéficiaires issus d'un QPV (22%)", 
-                             showcase = bsicons::bs_icon("buildings"),
-                             height = 50
-                           ) ,
                            
                            value_box("",
                                      "Des bénéficiaires en totalité masculins",
@@ -412,7 +525,7 @@ nav_panel("Saint-André - Centre Ville",
                        
                            value_box(title = "",
                                      "61% des bénéficiaires ont moins de 41 ans",
-                                     showcase = bsicons::bs_icon("arrow-90deg-right"),
+                                     showcase = bsicons::bs_icon("arrow-right"),
                                      height = 100),
                            
                            plotOutput("age_saint_andre", height = 150, width = 750)
@@ -421,19 +534,19 @@ nav_panel("Saint-André - Centre Ville",
                          )
                ),
            
-               nav_panel("Modalités d'embauche des bénéficiaires",
+               nav_panel("Modalités de réalisation des heures",
                          card(
                            
                            value_box("",
                                      "Type d'embauche des bénéficiaires",
-                                     showcase = bsicons::bs_icon("arrow-90deg-right"),
+                                     showcase = bsicons::bs_icon("arrow-right"),
                                      showcase_layout = "left center",
                                      height = 70),
                            plotOutput("modalite_saint_andre", height = 150, width = 750),
                            
                            value_box("",
                                      "Métiers des bénéficiaires",
-                                     showcase = bsicons::bs_icon("arrow-90deg-right"),
+                                     showcase = bsicons::bs_icon("arrow-right"),
                                      showcase_layout = "left center",
                                      height = 70),
                            plotOutput("metier_saint_andre", height = 250, width = 750)
@@ -460,7 +573,7 @@ nav_panel("Saint-Pierre - Bois d'olives",
                                
                                value_box( 
                                  title = "", 
-                                 "16 470 heures à réaliser à l'échelle du projet", 
+                                 "9 815 heures conventionnées à réaliser", 
                                  showcase = bsicons::bs_icon("clock"),
                                  showcase_layout = "left center",
                                  theme = "primary",
@@ -469,7 +582,7 @@ nav_panel("Saint-Pierre - Bois d'olives",
                                
                                value_box( 
                                  title = "", 
-                                 "3448,7 heures réalisées", 
+                                 "318,3 heures réalisées", 
                                  showcase = bsicons::bs_icon("calendar2-check"),
                                  showcase_layout = "left center",
                                  theme = "primary",
@@ -496,30 +609,90 @@ nav_panel("Saint-Pierre - Bois d'olives",
           
           layout_column_wrap(
             
+            
+            card(
+            
             navset_card_tab(
               
               nav_panel("Présentation",
                         layout_column_wrap(
                 plotOutput("map_saint_pierre", width = 400, height = 500),
-                div(style = "max-width: 300px; font-size: 0.785 rem; margin-left: 110px; white-space: pre-line;", textOutput("info_saint_pierre"))))
+                div(style = "max-width: 300px; font-size: 0.785 rem; margin-left: 110px; white-space: pre-line;", textOutput("info_saint_pierre")))),
               
+              nav_panel("Suivi des heures conventionnées ANRU/LBU",
+                        tableOutput("heure_conventionne_saint_pierre")),
+              
+              nav_panel("Suivi des heures à l'échelle du projet",
+                        tableOutput("heure_echelle_saint_pierre"))
             
+              ),
+          
             ),
-            
             
             card(
               
               navset_card_tab(
                 
-                nav_panel("Suivi des heure conventionnés",
-                          tableOutput("heure_conventionne_saint_pierre")),
+                nav_panel("Profil des bénéficiaires",
+                          
+                          br(),
+                          card(
+                            value_box( 
+                              title = "", 
+                              "DONNÉES QUALITATIVES MOMENTANÉMENT INDISPONIBLES",
+                              showcase = bsicons::bs_icon("info-circle"),
+                              height = 100
+                            ) ,
+                      
+                            br(),
+                            
+                            p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
+                            br(),
+                            tags$ul(
+                              tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville, …"),
+                              br(),
+                              tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques…"),
+                              br(),
+                              tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité…"),
+                              
+                            )
+                            
+                          )
+                ),
+            
+                nav_panel("Modalités de réalisation des heures",
+                          
+                          br(),
+                          
+                          card(
+                            value_box( 
+                              title = "", 
+                              "DONNÉES QUALITATIVES MOMENTANÉMENT INDISPONIBLES",
+                              showcase = bsicons::bs_icon("info-circle"),
+                              height = 100
+                            ) ,
+                            
+                            
+                            br(),
+                            
+                            p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
+                            br(),
+                            tags$ul(
+                              tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville, …"),
+                              br(),
+                              tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques…"),
+                              br(),
+                              tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité…"),
+                              
+                            )
+                            
+                           
+                          )
+                ),        
+                
              
-                
-                nav_panel("Suivi des heures non conventionnées",
-                          tableOutput("heure_non_conventionne_saint_pierre"))
-                
-               
-              )
+             
+                 )
              
               
         
@@ -527,11 +700,8 @@ nav_panel("Saint-Pierre - Bois d'olives",
             
           )
           
-          
-        
-          
-          )
-),
+        )
+      ),
 
 #page le Port
 
@@ -541,7 +711,7 @@ nav_panel("Le Port - Ariste Bolon",
                                
                                value_box( 
                                  title = "", 
-                                 "67 054 heures à réaliser à l'échelle du projet", 
+                                 "67 054 heures conventionnées à réaliser", 
                                  showcase = bsicons::bs_icon("clock"),
                                  showcase_layout = "left center",
                                  theme = "primary",
@@ -585,7 +755,10 @@ nav_panel("Le Port - Ariste Bolon",
                           div(style = "max-width: 300px; font-size: 0.785 rem; margin-left: 125px; white-space: pre-line;", textOutput("info_le_port")))),
                   
               
-              nav_panel("Suivi des heures d'insertion",
+              nav_panel("Suivi des heures conventionnées ANRU/LBU",
+                        tableOutput("heures_le_port_conventionnées")),
+              
+              nav_panel("Suivi des heures à l'échelle du projet",
                         tableOutput("heures_le_port"))
               
             ),
@@ -599,7 +772,7 @@ nav_panel("Le Port - Ariste Bolon",
                   value_box( 
                     title = "", 
                     "Bénéficiaires majoritairement masculins",
-                    showcase = bsicons::bs_icon("arrow-90deg-right"),
+                    showcase = bsicons::bs_icon("arrow-right"),
                     height = 100
                   ) ,
                   
@@ -608,7 +781,7 @@ nav_panel("Le Port - Ariste Bolon",
                   value_box( 
                     title = "",
                     "20% des bénéficiaires ont moins de 41 ans",
-                    showcase = bsicons::bs_icon("arrow-90deg-right"),
+                    showcase = bsicons::bs_icon("arrow-right"),
                     showcase_layout = "left center",
                     height = 70
                   ) ,
@@ -617,12 +790,12 @@ nav_panel("Le Port - Ariste Bolon",
                 )
               ),
               
-              nav_panel("Modalités d'embauche des bénéficiaires",
+              nav_panel("Modalités de réalisation des heures",
                 card(
                   value_box(
                     title = "",
                     "Type d'embauche des bénéficiaires",
-                    showcase = bsicons::bs_icon("arrow-90deg-right"),
+                    showcase = bsicons::bs_icon("arrow-right"),
                     showcase_layout = "left center",
                     height = 70
                   ),
@@ -649,7 +822,7 @@ nav_panel("Saint-Louis - Le Gol",
                                
                                value_box( 
                                  title = "", 
-                                 "41 292 heures à réaliser à l'échelle du projet", 
+                                 "41 292 heures conventionnées à réaliser", 
                                  showcase = bsicons::bs_icon("clock"),
                                  showcase_layout = "left center",
                                  theme = "primary",
@@ -691,13 +864,17 @@ nav_panel("Saint-Louis - Le Gol",
               nav_panel("Présentation",
                         layout_column_wrap(
                           plotOutput("map_saint_louis", width = 500, height = 500),
-                          div(style = "max-width: 300px; font-size: 0.785 rem; margin-left: 110px; white-space: pre-line;", textOutput("info_saint_louis"))))
+                          div(style = "max-width: 300px; font-size: 0.785 rem; margin-left: 110px; white-space: pre-line;", textOutput("info_saint_louis")))),
               
+              
+              nav_panel("Suivi des heures conventionnées ANRU/LBU",
+                        tableOutput("heure_saint_louis_conventionnées")),
+              
+              
+              nav_panel("Suivi des heures à l'échelle du projet",
+                        tableOutput("heure_saint_louis1")),
             
             ),
-            
-            
-            
             
             
             card(
@@ -705,43 +882,84 @@ nav_panel("Saint-Louis - Le Gol",
               
               navset_card_tab(
                 
-               
-                nav_panel("Suivi des heures d'insertion à l'échelle du projet",
-                          tableOutput("heure_saint_louis1"))
+                nav_panel("Profil des bénéficiaires",
+                          
+                          br(),
+                          
+                          card(
+                            value_box( 
+                              title = "", 
+                              "DONNÉES QUALITATIVES MOMENTANÉMENT INDISPONIBLES",
+                              showcase = bsicons::bs_icon("info-circle"),
+                              height = 100) ,
+                            
+                            br(),
+                            
+                            p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
+                            br(),
+                            tags$ul(
+                              tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville, …"),
+                              br(),
+                              tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques…"),
+                              br(),
+                              tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité…"),
+                              
+                            )
+                            
+                        ),
+                        
+                  ),
                 
-              )
-              
+                
+                nav_panel("Modalités de réalisation des heures",
+                          
+                          br(),
+                          
+                          card(
+                            value_box( 
+                              title = "", 
+                              "DONNÉES QUALITATIVES MOMENTANÉMENT INDISPONIBLES",
+                              showcase = bsicons::bs_icon("info-circle"),
+                              height = 100) ,
+                            
+                            br(),
+                            
+                            p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
+                            br(),
+                            tags$ul(
+                              tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville, …"),
+                              br(),
+                              tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques…"),
+                              br(),
+                              tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité…"),
+                              
+                            )
+                           
+                            
+                    )
+                          
+                ),
+                
+         ),
             
-              
-            )
             
-          )
-          
-          
+            ),
+            
+          ),
          
-          
-          )
+   )
 )
-
-
 
 
 
   ) # fin navset_card_tab
 ) # fin page_fillable
-  
 
 
 # Define server logic required to draw a histogram ----
 server <- function(input, output) {
   
-  
-  output$value <- renderText({ input$password })
-  
-  output$image1 <- renderImage({ 
-    list(src = "anru.png", height = "25%") 
-  }, 
-  deleteFile = FALSE)
+
   
   genre_pie <- function(df) {
     ggplot(df, aes(x="", y= nombre, fill= genre)) + geom_col(color="black") +
@@ -796,6 +1014,7 @@ server <- function(input, output) {
 \nSuperficie = 383 593 m²  "})
   
   output$heures_saint_denis <- renderTable(striped = TRUE,heures_saint_denis)
+  output$heures_saint_denis_anru <- renderTable(striped = TRUE,heures_saint_denis_anru)
   output$echelle_saint_denis <- renderTable(striped = TRUE,echelle_saint_denis)
   output$MO_saint_denis <- renderTable(striped = TRUE,{head(MO_saint_denis)})
   
@@ -891,7 +1110,7 @@ La ville de Saint-André et la SIDR impliqués dans le projet Rive Droite béné
 
 output$heure_echelle_saint_andré <- renderTable(striped = TRUE,{heure_echelle_saint_andré})
 output$objectifs_saint_andre     <- renderTable(striped = TRUE,{objectifs_saint_andre})
-output$heure_ANRU_saint_andre    <- renderTable(striped = TRUE,{heure_anru_saint_andré})
+output$heure_anru_saint_andré    <- renderTable(striped = TRUE,{heure_anru_saint_andré})
 
 # Graphiques qualitatifs pour Saint-André
 output$genre_saint_andre <- renderPlot({
@@ -959,6 +1178,7 @@ output$info_saint_pierre <- renderText({"La convention pluriannuelle du projet d
 output$heure_conventionne_saint_pierre     <- renderTable(striped = TRUE,{heure_conventionné_saint_pierre})
 output$objectif_saint_pierre_anru          <- renderTable(striped = TRUE,{objectif_saint_pierre_anru})
 output$heure_non_conventionne_saint_pierre <- renderTable(striped = TRUE,{heure_non_conventionné_saint_pierre})
+output$heure_echelle_saint_pierre <- renderTable(striped = TRUE,{heure_echelle_saint_pierre})
 output$objectif_saint_pierre_lbu           <- renderTable(striped = TRUE,{objectif_saint_pierre_lbu})
 
 
@@ -995,6 +1215,7 @@ output$info_le_port <- renderText({"La convention pluriannuelle du projet de ren
   \nSuperficie = 1 884 242 m²"})
 
 output$heures_le_port           <- renderTable(striped = TRUE,{heures_le_port})
+output$heures_le_port_conventionnées           <- renderTable(striped = TRUE,{heures_le_port_conventionnées})
 output$objectif_echelle_le_port <- renderTable(striped = TRUE,{objectif_echelle_le_port})
 output$objectif_anru_le_port   <- renderTable(striped = TRUE,{objectif_anru_le_port})
 output$objectif_lbu_le_port    <- renderTable(striped = TRUE,{objectif_lbu_le_port})
@@ -1048,13 +1269,16 @@ output$contrat_le_port <- renderPlot({
   height = 500, width = 500)
   
   output$info_saint_louis <- renderText({"La convention pluriannuelle du projet de renouvellement urbain de la ville de Saint-Louis Le Gol a été signée le 16 mars 2022. Un avenant a été signé le 23 mars 2025.
-\nSuperficie : 413 875 m²
-"})
+\nSuperficie : 413 875 m²"})
+  
+   output$heure_saint_louis1 <- renderTable(striped = TRUE,{heure_saint_louis1})
+   
+   output$heure_saint_louis_conventionnées <- renderTable(striped = TRUE,{heure_saint_louis_conventionnées})
+ 
+   output$accueil <- renderText("Bienvenue!")
+     
 
-output$heure_saint_louis1 <- renderTable(striped = TRUE,{heure_saint_louis1})
-output$objectif_operation_saint_louis <- renderTable(striped = TRUE,{objectif_operation_saint_louis})
-output$objectif_MO_saint_louis        <- renderTable(striped = TRUE,{objectif_MO_saint_louis})
-
+  
 }
 
 # Run the app ----
