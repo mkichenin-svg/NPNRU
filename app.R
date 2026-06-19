@@ -44,6 +44,7 @@ library(shinymanager)
   
   heure_echelle_saint_andré           <- read_csv2_utf8("heure_echelle_saint_andré.csv")
   heure_anru_saint_andré              <- read_csv2_utf8("heure_anru_saint_andré.csv")
+  genre_saint_andré                   <- read_csv2_utf8("genre_saint_andre.csv")
   
   heure_conventionné_saint_pierre     <- read_csv2_utf8("heure_conventionné_saint_pierre.csv")
   heure_non_conventionné_saint_pierre <- read_csv2_utf8("heure_non_conventionné_saint_pierre.csv")
@@ -263,7 +264,7 @@ layout_column_wrap(
                     "DONNÉES QUALITATIVES MOMENTANÉMENT INDISPONIBLES",
                     showcase = bsicons::bs_icon("info-circle"),
                     showcase_layout = "left center",
-                    height = 50) ,
+                    height = 80) ,
            br(),
            br(),
            
@@ -293,7 +294,7 @@ layout_column_wrap(
                    "DONNÉES QUALITATIVES MOMENTANÉMENT INDISPONIBLES",
                    showcase = bsicons::bs_icon("info-circle"),
                    showcase_layout = "left center",
-                   height = 50
+                   height = 80
             ) ,
             
             br(),
@@ -515,6 +516,7 @@ nav_panel("Saint-André - Centre Ville",
                                      showcase_layout = "left center",
                                      height = 100),
                            
+                           plotOutput("genre_saint_andré", height = 150, width = 750),
                        
                            value_box(title = "",
                                      "61% des bénéficiaires ont moins de 41 ans",
@@ -1106,8 +1108,8 @@ output$objectifs_saint_andre     <- renderTable(striped = TRUE,{objectifs_saint_
 output$heure_anru_saint_andré    <- renderTable(striped = TRUE,{heure_anru_saint_andré})
 
 # Graphiques qualitatifs pour Saint-André
-output$genre_saint_andre <- renderPlot({
-  pie <- ggplot(genre_saint_andre, aes(x = "", y = nombre, fill = genre)) +
+output$genre_saint_andré <- renderPlot({
+  pie <- ggplot(genre_saint_andré, aes(x = "", y = nombre, fill = genre)) +
     geom_col(color = "black") +
     coord_polar("y", start = 2.5) +
     theme_void() +
@@ -1115,9 +1117,9 @@ output$genre_saint_andre <- renderPlot({
           legend.text = element_text(size = 17)) +
     geom_label(aes(label = pourcentage), position = position_stack(vjust = 0.7),
                size = 5.5, show.legend = FALSE) +
-    scale_fill_manual(values = c("royalblue"))
+    scale_fill_manual(values = c("royalblue","orange"))
   pie
-}, height = 165, width = 500)
+}, height = 165, width = 750)
 
 output$age_saint_andre <- renderPlot({
   ggplot(age_saint_andre, aes(x = age, y = nombre, fill = age)) +
