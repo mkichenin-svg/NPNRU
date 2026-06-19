@@ -135,12 +135,7 @@ uiOutput("code")
 
 
 ui <- page_fillable(
-  
-  # logout button
-  div(class = "pull-right", shinyauthr::logoutUI(id = "logout")),
-  
-  # login section
-  shinyauthr::loginUI(id = "login"),
+ 
 
 
     theme = theme_bootswatch("minty"),
