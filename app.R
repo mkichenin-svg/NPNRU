@@ -340,7 +340,7 @@ nav_panel("Saint-Benoît - Rive Droite",p(layout_column_wrap(width = 200,
                                               
                                               value_box( 
                                                 title = "", 
-                                                "12 169,5 heures réalisées", 
+                                                "14 864 heures réalisées", 
                                                 showcase = bsicons::bs_icon("calendar2-check"),
                                                 showcase_layout = "left center",
                                                 theme = "primary",
