@@ -10,8 +10,6 @@ library(remotes)
 library(htmlwidgets)
 library(htmltools)
 library(shinymanager)
-library(shinyauthr)
-
 
 
   read_csv2_utf8 <- function(file) {
