@@ -41,7 +41,7 @@ library(shinymanager)
   participants_saint_benoit           <- read_csv2_utf8("participants_saint_benoit.csv")
   heure_echelle_saint_benoit          <- read_csv2_utf8("heure_echelle_saint_benoit.csv")
   heure_ANRU_saint_benoit             <- read_csv2_utf8("heure_ANRU_saint_benoit.csv")
-  modalite_saint_benoit               <- read_csv2_utf8("modalite_saint_benoit.csv")
+  modalite_saint_benoit               <- read_csv2_utf8("modalite_saint_benoit1.csv")
  
   
   heure_echelle_saint_andré           <- read_csv2_utf8("heure_echelle_saint_andré.csv")
@@ -413,8 +413,7 @@ layout_column_wrap(
       nav_panel("Modalités de réalisation des heures",
                 card(
                   
-                
-                  plotOutput("modalite_saint_benoit1", height = 200, width = 700),
+                  plotOutput("modalite_saint_benoit", height = 200, width = 700),
                   
                 )
       )
@@ -1015,7 +1014,7 @@ output$heure_ANRU_saint_benoit <- renderTable(striped = TRUE,{heure_ANRU_saint_b
 # Graphiques qualitatifs pour Saint-Benoît
 
 
-output$modalite_saint_benoit1 <- renderPlot({
+output$modalite_saint_benoit <- renderPlot({
   
   ggplot(modalite_saint_benoit, aes(y = reorder(modalite,nombre), x = nombre, fill = modalite)) +
     geom_bar(stat = "identity", show.legend = FALSE) +
