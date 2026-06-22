@@ -41,10 +41,13 @@ library(shinymanager)
   participants_saint_benoit           <- read_csv2_utf8("participants_saint_benoit.csv")
   heure_echelle_saint_benoit          <- read_csv2_utf8("heure_echelle_saint_benoit.csv")
   heure_ANRU_saint_benoit             <- read_csv2_utf8("heure_ANRU_saint_benoit.csv")
+  modalite_saint_benoit1               <- read_csv2_utf8("modalite_saint_benoit.csv")
+ 
   
   heure_echelle_saint_andré           <- read_csv2_utf8("heure_echelle_saint_andré.csv")
   heure_anru_saint_andré              <- read_csv2_utf8("heure_anru_saint_andré.csv")
   genre_saint_andré                   <- read_csv2_utf8("genre_saint_andre.csv")
+  modalite_saint_andré                <- read_csv2_utf8("modalite_saint_andré.csv")
   
   heure_conventionné_saint_pierre     <- read_csv2_utf8("heure_conventionné_saint_pierre.csv")
   heure_non_conventionné_saint_pierre <- read_csv2_utf8("heure_non_conventionné_saint_pierre.csv")
@@ -52,6 +55,7 @@ library(shinymanager)
   
   heures_le_port                      <- read_csv2_utf8("heures_le_port.csv")
   heures_le_port_conventionnées       <- read_csv2_utf8("heures_le_port_conventionnées.csv")
+  modalite_le_port                    <- read_csv2_utf8("modalite_le_port.csv")
   
   heure_saint_louis1                  <- read_csv2_utf8("heure_saint_louis1.csv") 
   heure_saint_louis_conventionnées    <- read_csv2_utf8("heure_saint_louis_conventionnées.csv") 
@@ -395,8 +399,7 @@ layout_column_wrap(
                   
                   value_box( 
                     title = "", 
-                    "Bénéficiaires majoritairement masculins",
-                    showcase = bsicons::bs_icon("arrow-right"),
+                    "Des bénéficiaires majoritairement masculins",
                     height = 50
                   ) ,
                   
@@ -405,7 +408,6 @@ layout_column_wrap(
                   value_box( 
                     title = "",
                     "72 % des bénéficiaires ont moins de 41 ans",
-                    showcase = bsicons::bs_icon("arrow-right"),
                     showcase_layout = "left center",
                     height = 50
                   ) ,
@@ -417,19 +419,9 @@ layout_column_wrap(
       nav_panel("Modalités de réalisation des heures",
                 card(
                   
-                  value_box("",
-                            "Type d'embauche des bénéficiaires",
-                            showcase = bsicons::bs_icon("arrow-right"),
-                            showcase_layout = "left center",
-                            height = 50),
-                  plotOutput("modalite_saint_benoit", height = 180, width = 700),
+                
+                  plotOutput("modalite_saint_benoit1", height = 200, width = 700),
                   
-                  value_box("",
-                            "Métiers des bénéficiaires",
-                            showcase = bsicons::bs_icon("arrow-right"),
-                            showcase_layout = "left center",
-                            height = 50),
-                  plotOutput("metier_saint_benoit", height = 280, width = 700)
                 )
       )
       
@@ -441,7 +433,7 @@ layout_column_wrap(
 )
 ),
 
-#page Saint-André - Centre ville
+# page Saint-André - Centre ville
 
 nav_panel("Saint-André - Centre Ville",
          
@@ -512,7 +504,7 @@ nav_panel("Saint-André - Centre Ville",
                            
                            value_box("",
                                      "Des bénéficiaires en totalité masculins",
-                                     showcase = bsicons::bs_icon("arrow-right"),
+                            
                                      showcase_layout = "left center",
                                      height = 100),
                            
@@ -520,7 +512,7 @@ nav_panel("Saint-André - Centre Ville",
                        
                            value_box(title = "",
                                      "61% des bénéficiaires ont moins de 41 ans",
-                                     showcase = bsicons::bs_icon("arrow-right"),
+                                     
                                      height = 100),
                            
                            plotOutput("age_saint_andre", height = 150, width = 750)
@@ -532,19 +524,10 @@ nav_panel("Saint-André - Centre Ville",
                nav_panel("Modalités de réalisation des heures",
                          card(
                            
-                           value_box("",
-                                     "Type d'embauche des bénéficiaires",
-                                     showcase = bsicons::bs_icon("arrow-right"),
-                                     showcase_layout = "left center",
-                                     height = 70),
-                           plotOutput("modalite_saint_andre", height = 150, width = 750),
+                          
+                           plotOutput("modalite_saint_andre", height = 200, width = 700),
                            
-                           value_box("",
-                                     "Métiers des bénéficiaires",
-                                     showcase = bsicons::bs_icon("arrow-right"),
-                                     showcase_layout = "left center",
-                                     height = 70),
-                           plotOutput("metier_saint_andre", height = 250, width = 750)
+                        
                          )
                )
                
@@ -767,7 +750,7 @@ nav_panel("Le Port - Ariste Bolon",
                   value_box( 
                     title = "", 
                     "Bénéficiaires majoritairement masculins",
-                    showcase = bsicons::bs_icon("arrow-right"),
+                 
                     height = 100
                   ) ,
                   
@@ -776,7 +759,7 @@ nav_panel("Le Port - Ariste Bolon",
                   value_box( 
                     title = "",
                     "20% des bénéficiaires ont moins de 41 ans",
-                    showcase = bsicons::bs_icon("arrow-right"),
+                 
                     showcase_layout = "left center",
                     height = 70
                   ) ,
@@ -787,22 +770,13 @@ nav_panel("Le Port - Ariste Bolon",
               
               nav_panel("Modalités de réalisation des heures",
                 card(
-                  value_box(
-                    title = "",
-                    "Type d'embauche des bénéficiaires",
-                    showcase = bsicons::bs_icon("arrow-right"),
-                    showcase_layout = "left center",
-                    height = 70
-                  ),
+                  
 
-                  plotOutput("contrat_le_port", height = 150)
+                  plotOutput("modalite_le_port", height = 200, width = 700)
                 )
               )
-              
             )
           )
-          
-          
           
           
     )
@@ -962,14 +936,14 @@ server <- function(input, output) {
       theme_void() + 
       theme(legend.position = "right", legend.title = element_blank(), legend.text = element_text(size=17)) +
       geom_label(aes(label = pourcentage), position= position_stack(vjust = 0.7),size = 5.5,
-                 show.legend = FALSE) + scale_fill_manual(values = c ("royalblue", "orange"))
+                 show.legend = FALSE) + scale_fill_manual(values = c ("steelblue", "orange"))
   }
   
   age_bar <- function(df) {
     ggplot(df, aes(x= age, y = nombre, fill = age)) + geom_bar(stat = "identity", show.legend = FALSE) + theme_minimal() + 
       geom_text(aes(label = pourcentage), hjust= 0.67,vjust= 1.5, color="black", size = 7) + 
       theme(axis.title = element_blank(), axis.text.y  = element_blank(), axis.text.x = element_text(size = 17)) +
-      scale_fill_manual(values = c ("grey", "orange","royalblue", "orange"))
+      scale_fill_manual(values = c ("grey", "orange","steelblue", "coral"))
   }
 
   # Graphes supprimés de Saint-Denis
@@ -1060,6 +1034,19 @@ output$modalite_saint_benoit <- renderPlot({
     xlim(0, max(modalite_data$nombre) * 1.2)
 }, height = 180, width = 700)
 
+output$modalite_saint_benoit1 <- renderPlot({
+  
+  ggplot(modalite_saint_benoit1, aes(y = reorder(modalite,nombre), x = nombre, fill = modalite)) +
+    geom_bar(stat = "identity", show.legend = FALSE) +
+    theme_minimal() +
+    geom_text(aes(label = pourcentage), hjust = -0.1, vjust = 0.5, color = "black", size = 6) +
+    theme(axis.title = element_blank(), axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 14)) +
+    scale_fill_manual(values = c("steelblue","coral", "orange")) +
+    xlim(0, max(modalite_data$nombre) * 1.2)
+}, height = 200, width = 700)
+
+
 output$metier_saint_benoit <- renderPlot({
   metier_data <- metier_saint_benoit
   metier_data$metier <- factor(metier_data$metier, 
@@ -1117,7 +1104,7 @@ output$genre_saint_andré <- renderPlot({
           legend.text = element_text(size = 17)) +
     geom_label(aes(label = pourcentage), position = position_stack(vjust = 0.7),
                size = 5.5, show.legend = FALSE) +
-    scale_fill_manual(values = c("royalblue","orange"))
+    scale_fill_manual(values = c("steelblue","orange"))
   pie
 }, height = 165, width = 750)
 
@@ -1128,30 +1115,35 @@ output$age_saint_andre <- renderPlot({
     geom_text(aes(label = pourcentage), hjust = 0.67, vjust = 1.5, color = "black", size = 7) +
     theme(axis.title = element_blank(), axis.text.y = element_blank(), 
           axis.text.x = element_text(size = 20)) +
-    scale_fill_manual(values = c("grey", "orange", "royalblue", "orange"))
+    scale_fill_manual(values = c("grey", "orange", "steelblue", "coral"))
 }, height = 150, width = 750)
 
 output$modalite_saint_andre <- renderPlot({
-  ggplot(modalite_saint_andre, aes(x = modalite, y = nombre, fill = modalite)) +
-    geom_bar(stat = "identity", show.legend = FALSE) +
+  
+  modalite_data <- modalite_saint_andré
+  modalite_data$modalite <- factor(modalite_saint_andré$modalite, levels = c("Embauche directe", "Mise à disposition", "Sous traitance / GOE"))
+
+  
+  ggplot (modalite_data, aes(x = reorder(modalite, nombre), y = nombre, fill = modalite) ) +
+    geom_bar(stat ="identity", show.legend = FALSE) +
     theme_minimal() +
-    geom_text(aes(label = pourcentage), hjust = 0.5, vjust = 1.3, color = "black", size = 7) +
-    theme(axis.title = element_blank(), axis.text.y = element_blank(),
-          axis.text.x = element_text(size = 19)) +
-    scale_fill_manual(values = c("royalblue", "orange"))
-}, height = 150, width = 750)
+    geom_text(aes(label = pourcentage), hjust = 1, vjust = 0.20, color = "black", size = 5.9) +
+    theme(axis.title = element_blank(), axis.text.x = element_blank(),
+          axis.text.y = element_text(size = 14, vjust = 0, hjust = 0)) + coord_flip()+
+    scale_fill_manual(values = c("steelblue", "coral","orange"))
+}, height = 200, width = 700)
 
 output$metier_saint_andre <- renderPlot({
   metier_data <- metier_saint_andre
   metier_data$metier <- factor(metier_data$metier, levels = c("Autre / Métier non défini", "Entretien des espaces verts", "Manoeuvre et conduite d'engins lourds de manutention"))
   
-  ggplot(metier_data, aes(y = metier, x = nombre, fill = metier)) +
+  ggplot(metier_data, aes(y = metier, x =nombre, fill = metier)) +
     geom_bar(stat = "identity", show.legend = FALSE) +
     theme_minimal() +
     geom_text(aes(label = pourcentage), hjust = 1, vjust = 0.5, color = "black", size = 7) +
     theme(axis.title = element_blank(), axis.text.x = element_blank(),
           axis.text.y = element_text(size = 14)) +
-    scale_fill_manual(values = c("grey", "orange", "royalblue"))
+    scale_fill_manual(values = c("grey", "orange", "steelblue"))
 }, height = 250, width = 750)
 
 output$map_saint_pierre <- renderPlot({ 
@@ -1224,7 +1216,7 @@ output$genre_le_port <- renderPlot({
           legend.text = element_text(size = 17)) +
     geom_label(aes(label = pourcentage), position = position_stack(vjust = 0.7),
                size = 5.5, show.legend = FALSE) +
-    scale_fill_manual(values = c("royalblue", "orange"))
+    scale_fill_manual(values = c("steelblue", "orange"))
   pie
 }, height = 165, width = 500)
 
@@ -1235,7 +1227,7 @@ output$age_le_port <- renderPlot({
     geom_text(aes(label = pourcentage), hjust = 0.67, vjust = 1.25, color = "black", size = 7) +
     theme(axis.title = element_blank(), axis.text.y = element_blank(),
           axis.text.x = element_text(size = 17)) +
-    scale_fill_manual(values = c("grey", "orange", "royalblue", "orange"))
+    scale_fill_manual(values = c("grey", "orange", "steelblue", "coral"))
 })
 
 output$contrat_le_port <- renderPlot({
@@ -1245,8 +1237,19 @@ output$contrat_le_port <- renderPlot({
     geom_text(aes(label = pourcentage), hjust = 0.67, vjust = .7, color = "black", size = 6.2) +
     theme(axis.title = element_blank(), axis.text.y = element_blank(),
           axis.text.x = element_text(size = 20)) +
-    scale_fill_manual(values = c("royalblue", "orange", "grey"))
+    scale_fill_manual(values = c("steelblue", "orange", "grey"))
 })
+
+
+output$modalite_le_port <- renderPlot({
+  ggplot(modalite_le_port, aes(x = reorder(modalite, nombre), y = nombre, fill = modalite)) +
+    geom_bar(stat = "identity", show.legend = FALSE) +
+    theme_minimal() +
+    geom_text(aes(label = pourcentage), hjust = .98, vjust = 1, color = "black", size = 6) +
+    theme(axis.title = element_blank(), axis.text.y = element_text(size=14,hjust = 0),
+          axis.text.x = element_blank()) + coord_flip()+
+    scale_fill_manual(values = c("steelblue", "coral", "grey"))
+}, height = 200, width = 700)
 
   output$map_saint_louis <- renderPlot({ 
     ggplot() +
