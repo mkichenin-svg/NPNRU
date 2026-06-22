@@ -964,7 +964,14 @@ nav_panel("Saint-Louis - Le Gol",
 ) # fin page_fillable
 
 # Wrap your UI with secure_app
-ui <- secure_app(ui, choose_language ="", language = "fr")
+ui <- secure_app(ui, choose_language ="", language = "fr",
+                 tags_top =
+                   tags$div(
+                     tags$h4("OBSERVATOIRE ANRU-NPNRU DE LA RÉUNION", style = "align:center"),
+                     
+                     )
+                
+                   )
 
 # Define server logic required to draw a histogram ----
 server <- function(input, output) {
