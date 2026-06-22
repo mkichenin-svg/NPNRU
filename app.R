@@ -122,12 +122,6 @@ age_saint_benoit <- data.frame(
   pourcentage = c("22,2%", "50,0%", "13,9%", "13,9%")
 )
 
-modalite_saint_benoit <- data.frame(
-  modalite    = factor(c("ETTI", "Embauche directe", "AI", "EI"),
-                       levels = c("ETTI", "Embauche directe", "AI", "EI")),
-  nombre      = c(34, 6, 1, 1),
-  pourcentage = c("81,0%", "14,3%", "2,4%", "2,4%")
-)
 
 metier_saint_benoit <- data.frame(
   metier      = factor(c("Préparation du gros oeuvre et travaux publics", "Manoeuvre et conduite d'engins lourds", "Montage d'agencements", "Maçonnerie et béton", "Électricité et équipements", "Menuiseries et fermetures", "Engins de terrassement", "Études et autres"),
