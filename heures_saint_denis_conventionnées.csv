@@ -1,8 +1,8 @@
-﻿MOA;Objectif conventionné (en h);Heures effectuées au 31/03/2026;% de réalisation
+﻿MOA;Objectif à l’échelle du projet (en h);Heures effectuées au 31/03/2026;% de réalisation
 Ville de Saint-Denis;21 001;19 323;92%
 SIDR;21 780;11 661;54%
 SHLMR;23 758;22 604;95%
-SODIAC;4 882;3 529;72%
-SEDRE;1 861;1 488;80%
+SODIAC*;4 882;3 529;72%
+SEDRE*;1 861;1 488;80%
 SEMADER;683;0;0%
 TOTAL;73 965;58 605;79,23%
