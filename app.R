@@ -11,6 +11,14 @@ library(htmlwidgets)
 library(htmltools)
 library(shinymanager)
 
+# define some credentials
+credentials <- data.frame(
+  user = c("shiny", "shinymanager","MDEN-ANRU"),
+  password = c("azerty", "12345","ANRU2026"),
+  stringsAsFactors = FALSE
+)
+
+
 
   read_csv2_utf8 <- function(file) {
     con <- file(file, "r", encoding = "UTF-8")
@@ -134,7 +142,6 @@ uiOutput("code")
 
 
 ui <- page_fillable(
- 
 
 
     theme = theme_bootswatch("minty"),
@@ -269,11 +276,11 @@ layout_column_wrap(
            p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
            br(),
            tags$ul(
-             tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville, …"),
+             tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville."),
              br(),
-             tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques…"),
+             tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques."),
              br(),
-             tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité…"),
+             tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité."),
              
            ),
         ),
@@ -301,11 +308,11 @@ layout_column_wrap(
             p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
               br(),
             tags$ul(
-              tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville, …"),
+              tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville."),
               br(),
-              tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques…"),
+              tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques."),
               br(),
-              tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité…"),
+              tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité."),
               
              
             )
@@ -647,11 +654,11 @@ nav_panel("Saint-Pierre - Bois d'olives",
                             p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
                             br(),
                             tags$ul(
-                              tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville, …"),
+                              tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville."),
                               br(),
-                              tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques…"),
+                              tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques."),
                               br(),
-                              tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité…"),
+                              tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité."),
                               
                             )
                           )
@@ -675,11 +682,11 @@ nav_panel("Saint-Pierre - Bois d'olives",
                             p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
                             br(),
                             tags$ul(
-                              tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville, …"),
+                              tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville."),
                               br(),
-                              tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques…"),
+                              tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques."),
                               br(),
-                              tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité…"),
+                              tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité."),
                               
                             )
                             
@@ -898,11 +905,11 @@ nav_panel("Saint-Louis - Le Gol",
                             p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
                             br(),
                             tags$ul(
-                              tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville, …"),
+                              tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville."),
                               br(),
-                              tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques…"),
+                              tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques."),
                               br(),
-                              tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité…"),
+                              tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité."),
                               
                             )
                             
@@ -927,25 +934,26 @@ nav_panel("Saint-Louis - Le Gol",
                             p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
                             br(),
                             tags$ul(
-                              tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville, …"),
+                              tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville."),
                               br(),
-                              tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques…"),
+                              tags$li(tags$b("modalités de réalisation des heures"), " - embauche directe, mise à disposition, recours à la sous-traitance ou au groupement d'opérateurs économiques."),
                               br(),
-                              tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité…"),
+                              tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité."),
                               
                             )
                            
-                            
-                    )
+                         )
                           
-                ),
+                      ),
                 
-         ),
+                   ),
             
             
+              
             ),
             
           ),
+          
          
    )
 )
@@ -955,11 +963,12 @@ nav_panel("Saint-Louis - Le Gol",
   ) # fin navset_card_tab
 ) # fin page_fillable
 
+# Wrap your UI with secure_app
+ui <- secure_app(ui, choose_language ="", language = "fr")
 
 # Define server logic required to draw a histogram ----
 server <- function(input, output) {
   
-
   
   genre_pie <- function(df) {
     ggplot(df, aes(x="", y= nombre, fill= genre)) + geom_col(color="black") +
@@ -1291,7 +1300,23 @@ output$modalite_le_port <- renderPlot({
    output$heure_saint_louis_conventionnées <- renderTable(striped = TRUE,{heure_saint_louis_conventionnées})
  
    output$accueil <- renderText("Bienvenue!")
-     
+
+   # call the server part
+   # check_credentials returns a function to authenticate users
+   res_auth <- secure_server(
+     check_credentials = check_credentials(credentials)
+   )
+   
+   output$auth_output <- renderPrint({
+     reactiveValuesToList(res_auth)
+   })
+   
+
+   observe({
+     print(input$shinymanager_where)
+     print(input$shinymanager_language)
+   })
+   
 
   
 }
