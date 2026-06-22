@@ -411,9 +411,12 @@ layout_column_wrap(
       ),
       
       nav_panel("Modalités de réalisation des heures",
-                
                 card(
-                  plotOutput("modalite_saint_benoit", height = 200, width = 500)
+                  
+                  
+                  plotOutput("modalite_saint_benoit", height = 200, width = 750),
+                  
+                  
                 )
       )
       
@@ -764,7 +767,7 @@ nav_panel("Le Port - Ariste Bolon",
                 card(
                   
 
-                  plotOutput("modalite_le_port", height = 200, width = 700)
+                  plotOutput("modalite_le_port", height = 200, width = 750)
                 )
               )
             )
@@ -1018,12 +1021,11 @@ output$modalite_saint_benoit <- renderPlot({
   ggplot(modalite_saint_benoit, aes(y = reorder(modalite,nombre), x = nombre, fill = modalite)) +
     geom_bar(stat = "identity", show.legend = FALSE) +
     theme_minimal() +
-    geom_text(aes(label = pourcentage), hjust = -0.1, vjust = 0.5, color = "black", size = 6) +
+    geom_text(aes(label = pourcentage), hjust = 0.5, vjust = 0.5, color = "black", size = 5.9) +
     theme(axis.title = element_blank(), axis.text.x = element_blank(),
           axis.text.y = element_text(size = 14)) +
-    scale_fill_manual(values = c("steelblue","coral", "orange")) +
-    xlim(0, max(modalite_data$nombre) * 1.2)
-}, height = 200, width = 500)
+    scale_fill_manual(values = c("steelblue","coral", "orange")) 
+}, height = 200, width = 750)
 
 
 output$metier_saint_benoit <- renderPlot({
