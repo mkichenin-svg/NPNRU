@@ -413,7 +413,7 @@ layout_column_wrap(
       nav_panel("Modalités de réalisation des heures",
                 card(
                   
-                  plotOutput("modalite_saint_benoit", height = 200, width = 700),
+                  plotOutput("modalite_saint_benoit", height = 200, width = 700)
                   
                 )
       )
