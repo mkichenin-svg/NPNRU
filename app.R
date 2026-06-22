@@ -416,9 +416,22 @@ layout_column_wrap(
                   
                   plotOutput("modalite_saint_benoit", height = 200, width = 700),
                   
+    
+                  br(),
+                  br(),
+                  
+                  tags$ul(
+                    tags$li(tags$b("Embauche directe"), " : contrat à durée indéterminée (CDI), en contrat à durée déterminée (CDD) par l'entreprise titulaire, ou en contrats en alternance (contrat de professionnalisation ou contrat d'apprentissage). "),
+                    br(),
+                    tags$li(tags$b("Mise à disposition"), " : mise à disposition de salariés en insertion via le recours à une association intermédiaire (AI), ou à une entreprise de travail temporaire d'insertion (ETTI), ou à une entreprise adaptée de travail temporaire (EATT), ou à un groupement d'employeurs pour l'insertion et la qualification (GEIQ), ou à une entreprise de travail temporaire (ETT)."),
+                    br(),
+                    tags$li(tags$b("Sous-traitance/GOE"), " : recours à la sous-traitance ou au groupement d'opérateurs économiques avec une entreprise d'insertion (EI), un atelier chantier d'insertion (ACI) ou une entreprise adaptée (EA), un établissement et service d'aide par le travail (ESAT), une entreprise d'insertion par le travail indépendant (EITI), ou un travailleur indépendant handicapé (TIH). "),
+                  )
+                  
+                  
                   
                 )
-      )
+            )
       
     )
   )
@@ -521,6 +534,18 @@ nav_panel("Saint-André - Centre Ville",
                            
                           
                            plotOutput("modalite_saint_andre", height = 200, width = 700),
+                           
+                           
+                           br(),
+                           br(),
+                           
+                           tags$ul(
+                             tags$li(tags$b("Embauche directe"), " : contrat à durée indéterminée (CDI), en contrat à durée déterminée (CDD) par l'entreprise titulaire, ou en contrats en alternance (contrat de professionnalisation ou contrat d'apprentissage). "),
+                             br(),
+                             tags$li(tags$b("Mise à disposition"), " : mise à disposition de salariés en insertion via le recours à une association intermédiaire (AI), ou à une entreprise de travail temporaire d'insertion (ETTI), ou à une entreprise adaptée de travail temporaire (EATT), ou à un groupement d'employeurs pour l'insertion et la qualification (GEIQ), ou à une entreprise de travail temporaire (ETT)."),
+                             br(),
+                             tags$li(tags$b("Sous-traitance/GOE"), " : recours à la sous-traitance ou au groupement d'opérateurs économiques avec une entreprise d'insertion (EI), un atelier chantier d'insertion (ACI) ou une entreprise adaptée (EA), un établissement et service d'aide par le travail (ESAT), une entreprise d'insertion par le travail indépendant (EITI), ou un travailleur indépendant handicapé (TIH). "),
+                           )
                            
                         
                          )
@@ -629,7 +654,6 @@ nav_panel("Saint-Pierre - Bois d'olives",
                               tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité…"),
                               
                             )
-                            
                           )
                 ),
             
@@ -767,7 +791,19 @@ nav_panel("Le Port - Ariste Bolon",
                 card(
                   
 
-                  plotOutput("modalite_le_port", height = 200, width = 750)
+                  plotOutput("modalite_le_port", height = 200, width = 700),
+                  
+                  
+                  br(),
+                  br(),
+                  
+                  tags$ul(
+                    tags$li(tags$b("Embauche directe"), " : contrat à durée indéterminée (CDI), en contrat à durée déterminée (CDD) par l'entreprise titulaire, ou en contrats en alternance (contrat de professionnalisation ou contrat d'apprentissage). "),
+                    br(),
+                    tags$li(tags$b("Mise à disposition"), " : mise à disposition de salariés en insertion via le recours à une association intermédiaire (AI), ou à une entreprise de travail temporaire d'insertion (ETTI), ou à une entreprise adaptée de travail temporaire (EATT), ou à un groupement d'employeurs pour l'insertion et la qualification (GEIQ), ou à une entreprise de travail temporaire (ETT)."),
+                    br(),
+                    tags$li(tags$b("Sous-traitance/GOE"), " : recours à la sous-traitance ou au groupement d'opérateurs économiques avec une entreprise d'insertion (EI), un atelier chantier d'insertion (ACI) ou une entreprise adaptée (EA), un établissement et service d'aide par le travail (ESAT), une entreprise d'insertion par le travail indépendant (EITI), ou un travailleur indépendant handicapé (TIH). "),
+                  )
                 )
               )
             )
