@@ -414,7 +414,7 @@ layout_column_wrap(
                 card(
                   
                   
-                  plotOutput("modalite_saint_benoit", height = 200, width = 750),
+                  plotOutput("modalite_saint_benoit", height = 200, width = 700),
                   
                   
                 )
@@ -1021,11 +1021,11 @@ output$modalite_saint_benoit <- renderPlot({
   ggplot(modalite_saint_benoit, aes(y = reorder(modalite,nombre), x = nombre, fill = modalite)) +
     geom_bar(stat = "identity", show.legend = FALSE) +
     theme_minimal() +
-    geom_text(aes(label = pourcentage), hjust = 0.5, vjust = 0.5, color = "black", size = 5.9) +
+    geom_text(aes(label = pourcentage), hjust = 0.7, vjust = 0.5, color = "black", size = 5.9) +
     theme(axis.title = element_blank(), axis.text.x = element_blank(),
           axis.text.y = element_text(size = 14)) +
     scale_fill_manual(values = c("steelblue","coral", "orange")) 
-}, height = 200, width = 750)
+}, height = 200, width = 700)
 
 
 output$metier_saint_benoit <- renderPlot({
