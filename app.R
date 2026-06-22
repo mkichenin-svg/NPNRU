@@ -237,12 +237,12 @@ layout_column_wrap(
       nav_panel("Suivi des heures conventionnées ANRU/LBU",
                 tableOutput("heures_saint_denis_anru"),
                 div(style = "font-size: 1.7rem; color: #666; margin-top: 15px; font-style: italic;", 
-                    "* Il convient également de noter que la ville de Saint-Denis nous a informé que les opérations MOA concernant la SEDRE et la SODIAC sont terminées.")),
+                    "* La ville de Saint-Denis nous a informé que les opérations MOA concernant la SEDRE et la SODIAC sont terminées.")),
     
       nav_panel("Suivi des heures à l'échelle du projet",
                 tableOutput("heures_saint_denis"),
                 div(style = "font-size: 1.7rem; color: #666; margin-top: 15px; font-style: italic;", 
-                              "* Il convient également de noter que la ville de Saint-Denis nous a informé que les opérations MOA concernant la SEDRE et la SODIAC sont terminées.")),
+                              "* La ville de Saint-Denis nous a informé que les opérations MOA concernant la SEDRE et la SODIAC sont terminées.")),
       
        ),
     ),
@@ -749,7 +749,7 @@ nav_panel("Le Port - Ariste Bolon",
                     height = 100
                   ) ,
                   
-                  plotOutput("genre_le_port",height = 150, width = 550),
+                  plotOutput("genre_le_port",height = 165, width = 750),
                   
                   value_box( 
                     title = "",
@@ -1199,7 +1199,7 @@ output$genre_le_port <- renderPlot({
                size = 5.5, show.legend = FALSE) +
     scale_fill_manual(values = c("steelblue", "orange"))
   pie
-}, height = 165, width = 500)
+}, height = 165, width = 750)
 
 output$age_le_port <- renderPlot({
   ggplot(age_le_port, aes(x = age, y = nombre, fill = age)) +
