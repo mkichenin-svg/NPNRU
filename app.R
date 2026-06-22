@@ -411,10 +411,9 @@ layout_column_wrap(
       ),
       
       nav_panel("Modalités de réalisation des heures",
+                
                 card(
-                  
-                  plotOutput("modalite_saint_benoit", height = 200, width = 700)
-                  
+                  plotOutput("modalite_saint_benoit", height = 200, width = 500)
                 )
       )
       
@@ -1024,7 +1023,7 @@ output$modalite_saint_benoit <- renderPlot({
           axis.text.y = element_text(size = 14)) +
     scale_fill_manual(values = c("steelblue","coral", "orange")) +
     xlim(0, max(modalite_data$nombre) * 1.2)
-}, height = 200, width = 700)
+}, height = 200, width = 500)
 
 
 output$metier_saint_benoit <- renderPlot({
