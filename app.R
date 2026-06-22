@@ -1112,7 +1112,7 @@ output$modalite_saint_andre <- renderPlot({
     theme(axis.title = element_blank(), axis.text.x = element_blank(),
           axis.text.y = element_text(size = 14, vjust = 0, hjust = 0)) + coord_flip()+
     scale_fill_manual(values = c("steelblue", "coral","orange"))
-}, height = 200, width = 700)
+}, height = 200, width = 750)
 
 output$metier_saint_andre <- renderPlot({
   metier_data <- metier_saint_andre
