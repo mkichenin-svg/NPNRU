@@ -1021,16 +1021,16 @@ server <- function(input, output) {
   output$map <- renderPlot({ 
       ggplot() +
       geom_sf(data = iris[1,31])+
-      geom_sf_label(data= iris[1,31], label = "Beaulieu - Bras fusil - La Confiance")+
+      geom_sf_label(data= iris[1,31], label = "La Confiance - Beaulieu - Bras fusil")+
       geom_sf(data = iris[3,31])+
       geom_sf(data = iris[9,31])+
       geom_sf(data = iris[12,31])+
       geom_sf(data = iris[21,31])+
       geom_sf(data= shapefile2[36,], color = "black", fill="orange", alpha= 7/10) +
-      geom_sf_label(data= iris[3,31], label = "Butor-Beaufond Le port")+
+      geom_sf_label(data= iris[3,31], label = "Butor-Beaufond 'Le port'")+
       geom_sf_label(data = iris[9,31], label = "Beaufond Distillerie")+
       geom_sf_label(data = iris[12,31], label = "Centre ville-Rive gauche")+
-      geom_sf_label(data = iris[21,31], label = "Centre ville-Rive droite")+
+      geom_sf_label(data = iris[21,31], label = "Labourdonnais -Rive droite")+
       theme_minimal() + theme(axis.text.y = element_blank(), axis.text.x = element_blank(),
                                 axis.title.x = element_blank(), axis.title.y = element_blank())
   
