@@ -41,7 +41,7 @@ library(shinymanager)
   participants_saint_benoit           <- read_csv2_utf8("participants_saint_benoit.csv")
   heure_echelle_saint_benoit          <- read_csv2_utf8("heure_echelle_saint_benoit.csv")
   heure_ANRU_saint_benoit             <- read_csv2_utf8("heure_ANRU_saint_benoit.csv")
-  modalite_saint_benoit1               <- read_csv2_utf8("modalite_saint_benoit.csv")
+  modalite_saint_benoit               <- read_csv2_utf8("modalite_saint_benoit.csv")
  
   
   heure_echelle_saint_andré           <- read_csv2_utf8("heure_echelle_saint_andré.csv")
@@ -1013,24 +1013,11 @@ output$heure_echelle_saint_benoit <- renderTable(striped = TRUE,{heure_echelle_s
 output$heure_ANRU_saint_benoit <- renderTable(striped = TRUE,{heure_ANRU_saint_benoit})
 
 # Graphiques qualitatifs pour Saint-Benoît
-output$modalite_saint_benoit <- renderPlot({
-  modalite_data <- modalite_saint_benoit
-  modalite_data$modalite <- factor(modalite_data$modalite, 
-                                   levels = c("EI", "AI", "Embauche directe", "ETTI"))
-  
-  ggplot(modalite_data, aes(y = modalite, x = nombre, fill = modalite)) +
-    geom_bar(stat = "identity", show.legend = FALSE) +
-    theme_minimal() +
-    geom_text(aes(label = pourcentage), hjust = -0.1, vjust = 0.5, color = "black", size = 6) +
-    theme(axis.title = element_blank(), axis.text.x = element_blank(),
-          axis.text.y = element_text(size = 13)) +
-    scale_fill_manual(values = c("coral", "steelblue", "orange", "royalblue")) +
-    xlim(0, max(modalite_data$nombre) * 1.2)
-}, height = 180, width = 700)
+
 
 output$modalite_saint_benoit1 <- renderPlot({
   
-  ggplot(modalite_saint_benoit1, aes(y = reorder(modalite,nombre), x = nombre, fill = modalite)) +
+  ggplot(modalite_saint_benoit, aes(y = reorder(modalite,nombre), x = nombre, fill = modalite)) +
     geom_bar(stat = "identity", show.legend = FALSE) +
     theme_minimal() +
     geom_text(aes(label = pourcentage), hjust = -0.1, vjust = 0.5, color = "black", size = 6) +
