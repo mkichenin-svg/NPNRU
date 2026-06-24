@@ -160,6 +160,7 @@ ui <- page_fillable(
   tags$nav(
     class = "navbar navbar-expand-lg navbar-light bg-light w-100",
     style = "border-bottom: 1px solid #dee2e6; position: relative; z-index: 100; padding: 10px 20px; display: flex; align-items: center; justify-content: center; min-height: 130px; gap: 0;",
+    
     # Logos on the left with negative margin
   
     tags$div(
@@ -966,11 +967,23 @@ nav_panel("Saint-Louis - Le Gol",
 # Wrap your UI with secure_app
 ui <- secure_app(ui, choose_language ="", language = "fr",
                  tags_top =
+                   
                    tags$div(
+                     
                      tags$h4("OBSERVATOIRE ANRU-NPNRU DE LA RÉUNION", style = "align:center"),
                      
+                   ),
+                 
+                 tags_bottom = 
+                   
+                   tags$div(
+                     style = "position: top; left: 10px; display: flex; align-items: center; gap: 110px; line-height: .9;",
+                     tags$img(src = "img/anru.png", style = "height: 120px; object-fit: contain; display: block;"),
+                     tags$img(src = "img/logo_pref.png", style = "height: 100px; object-fit: contain; display: block;position: top; center: 10px; display: flex; align-items: center; gap: 10px; line-height: .9;"),
+                     tags$img(src = "img/logo_mden.png", style = "height: 37px; object-fit: contain; display: block;position: top; right: 40px; display: flex; align-items: center; gap: 2px; line-height: 0.9;")
+                     
                      )
-                
+                   
                    )
 
 # Define server logic required to draw a histogram ----
