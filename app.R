@@ -978,7 +978,7 @@ ui <- secure_app(ui, choose_language ="", language = "fr",
                  tags_bottom = 
                    
                    tags$div(
-                     style = "position: bottom; center: 100px; display: flex; align-items: center; gap: 80px; line-height: .9;",
+                     style = "position: bottom; center: 100px; display: flex; align-items: center; gap: 77px; line-height: .9;",
                      tags$img(src = "img/anru.png", style = "height: 100px; width: 100px;  object-fit: contain;"),
                      tags$img(src = "img/logo_pref.png", style = "height: 70px; width:100px, object-fit: contain; "),
                      tags$img(src = "img/logo_mden.png", style = "height: 35px; object-fit: contain; ")
