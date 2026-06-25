@@ -274,7 +274,7 @@ layout_column_wrap(
            br(),
            br(),
            
-           p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
+           p("Nos indicateurs qualitatifs respectent la nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015, et sont les suivants:"),
            br(),
            tags$ul(
              tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville."),
@@ -306,8 +306,8 @@ layout_column_wrap(
             br(),
             br(),
   
-            p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
-              br(),
+            p("Nos indicateurs qualitatifs respectent la nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015, et sont les suivants:"),
+            br(),
             tags$ul(
               tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville."),
               br(),
@@ -436,13 +436,11 @@ layout_column_wrap(
                     tags$li(tags$b("Sous-traitance/GOE"), " : recours à la sous-traitance ou au groupement d'opérateurs économiques avec une entreprise d'insertion (EI), un atelier chantier d'insertion (ACI) ou une entreprise adaptée (EA), un établissement et service d'aide par le travail (ESAT), une entreprise d'insertion par le travail indépendant (EITI), ou un travailleur indépendant handicapé (TIH). "),
                   )
                   
-                  
-                  
                 )
-            )
+              )
       
-    )
-  )
+       )
+     )
   
 )
 
@@ -556,17 +554,15 @@ nav_panel("Saint-André - Centre Ville",
                            )
                            
                         
-                         )
-               )
-               
-             )
-           )
-           
-         )
-         
-        
-         
+                )
+              )
+            )
           )
+        )
+ 
+                
+        
+  )
 ),
 
            
@@ -652,7 +648,7 @@ nav_panel("Saint-Pierre - Bois d'olives",
                       
                             br(),
                             
-                            p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
+                            p("Nos indicateurs qualitatifs respectent la nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015, et sont les suivants:"),
                             br(),
                             tags$ul(
                               tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville."),
@@ -663,6 +659,7 @@ nav_panel("Saint-Pierre - Bois d'olives",
                               
                             )
                           )
+                          
                 ),
             
                 nav_panel("Modalités de réalisation des heures",
@@ -680,7 +677,7 @@ nav_panel("Saint-Pierre - Bois d'olives",
                             
                             br(),
                             
-                            p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
+                            p("Nos indicateurs qualitatifs respectent la nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015, et sont les suivants:"),
                             br(),
                             tags$ul(
                               tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville."),
@@ -690,10 +687,8 @@ nav_panel("Saint-Pierre - Bois d'olives",
                               tags$li(tags$b("typologie des entreprises attributaires"), " - nombre de salariés, secteur d’activité."),
                               
                             )
-                            
-                           
                           )
-                ),        
+                        ),        
                 
              
              
@@ -903,7 +898,7 @@ nav_panel("Saint-Louis - Le Gol",
                             
                             br(),
                             
-                            p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
+                            p("Nos indicateurs qualitatifs respectent la nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015, et sont les suivants:"),
                             br(),
                             tags$ul(
                               tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville."),
@@ -932,7 +927,7 @@ nav_panel("Saint-Louis - Le Gol",
                             
                             br(),
                             
-                            p("Nos indicateurs qualitatifs respectent la Nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015 et sont les suivants:"),
+                            p("Nos indicateurs qualitatifs respectent la nouvelle charte nationale d’insertion applicable dans le cadre du NPNRU, validée par le conseil d’administration de l’ANRU du 24 mars 2015, et sont les suivants:"),
                             br(),
                             tags$ul(
                               tags$li(tags$b("profil des bénéficiaires"), " - sexe, âge, résidence dans un quartier prioritaire de la politique de la ville."),
@@ -984,7 +979,6 @@ ui <- secure_app(ui, choose_language ="", language = "fr",
                      tags$img(src = "img/logo_mden.png", style = "height: 35px; object-fit: contain; ")
                      
                      )
-                   
                    )
 
 # Define server logic required to draw a histogram ----
