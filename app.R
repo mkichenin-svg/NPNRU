@@ -13,11 +13,10 @@ library(shinymanager)
 
 # define some credentials
 credentials <- data.frame(
-  user = c("shiny", "shinymanager","MDEN-ANRU"),
+  user = c("shiny", "shinymanager","OBSERVATOIRE-ANRU"),
   password = c("azerty", "12345","ANRU2026"),
   stringsAsFactors = FALSE
 )
-
 
 
   read_csv2_utf8 <- function(file) {
@@ -50,12 +49,13 @@ credentials <- data.frame(
   heure_echelle_saint_benoit          <- read_csv2_utf8("heure_echelle_saint_benoit.csv")
   heure_ANRU_saint_benoit             <- read_csv2_utf8("heure_ANRU_saint_benoit.csv")
   modalite_saint_benoit               <- read_csv2_utf8("modalite_saint_benoit1.csv")
+  attri_saint_benoit                  <- read_csv2_utf8("attri_saint_benoit.csv")
  
-  
   heure_echelle_saint_andré           <- read_csv2_utf8("heure_echelle_saint_andré.csv")
   heure_anru_saint_andré              <- read_csv2_utf8("heure_anru_saint_andré.csv")
   genre_saint_andré                   <- read_csv2_utf8("genre_saint_andre.csv")
   modalite_saint_andré                <- read_csv2_utf8("modalite_saint_andré.csv")
+  attri_saint_andre                   <- read_csv2_utf8("attri_saint_andre.csv")
   
   heure_conventionné_saint_pierre     <- read_csv2_utf8("heure_conventionné_saint_pierre.csv")
   heure_non_conventionné_saint_pierre <- read_csv2_utf8("heure_non_conventionné_saint_pierre.csv")
